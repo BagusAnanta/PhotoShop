@@ -23,13 +23,13 @@ class DataViewModelClass : ViewModel() {
                 _Datauser.postValue(fetchDataUser)
             } catch (e : Exception){
                 // Connection Lost
+                Log.e("DataViewModel Exception",e.toString())
             }
         }
     }
 
     fun insertDataLogin(username : String?,password : String?){
         val TAG = "InsertDataResult"
-
         viewModelScope.launch {
             try {
                 val callDataLogin = apiInterface.insertData(username,password)
