@@ -29,13 +29,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bsoftware.myapplication.dataViewModelClass.DataViewModelClass
+import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class SignUpActivity : ComponentActivity() {
 
-    private val dataviewmodel : DataViewModelClass by viewModels()
+    private val dataviewmodel : LoginDataViewModelClass by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -54,7 +54,7 @@ class SignUpActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUp(dataviewmodel : DataViewModelClass) {
+fun SignUp(dataviewmodel : LoginDataViewModelClass) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 

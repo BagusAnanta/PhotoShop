@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bsoftware.myapplication.loginAPI.LoginInterfaceAPI
-import com.bsoftware.myapplication.loginDataClass.LoginDataClass
+import com.bsoftware.myapplication.appAPI.LoginInterfaceAPI
+import com.bsoftware.myapplication.dataClass.LoginDataClass
 import com.bsoftware.myapplication.retrofit.RetrofitInit
 import kotlinx.coroutines.launch
-import retrofit2.create
 
-class DataViewModelClass : ViewModel() {
+class LoginDataViewModelClass : ViewModel() {
     private val apiInterface = RetrofitInit().retrofit.create(LoginInterfaceAPI::class.java)
     private val _Datauser = MutableLiveData<List<LoginDataClass>>()
     val Datauser : LiveData<List<LoginDataClass>> = _Datauser

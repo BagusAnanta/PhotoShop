@@ -3,7 +3,6 @@ package com.bsoftware.myapplication
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -39,12 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.bsoftware.myapplication.dataViewModelClass.DataViewModelClass
+import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
-    private val dataviewmodel : DataViewModelClass by viewModels()
+    private val dataviewmodel : LoginDataViewModelClass by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +72,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginUserLogic(dataViewModel : DataViewModelClass, lifeCycleOwner: LifecycleOwner){
+fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: LifecycleOwner){
     var username by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
 

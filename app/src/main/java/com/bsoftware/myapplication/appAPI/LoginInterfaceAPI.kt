@@ -1,6 +1,6 @@
-package com.bsoftware.myapplication.loginAPI
+package com.bsoftware.myapplication.appAPI
 
-import com.bsoftware.myapplication.loginDataClass.LoginDataClass
+import com.bsoftware.myapplication.dataClass.LoginDataClass
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

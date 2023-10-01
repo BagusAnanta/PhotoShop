@@ -1,4 +1,4 @@
-package com.bsoftware.myapplication.loginDataClass
+package com.bsoftware.myapplication.dataClass
 
 import com.google.gson.annotations.SerializedName
 

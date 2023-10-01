@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -63,8 +64,8 @@ fun InputData(){
     var photo by remember { mutableStateOf("") }
 
     var imageURI by remember { mutableStateOf<Uri?>(null) }
-    var bitmap = remember{ mutableStateOf<Bitmap?>(null) }
-    var context = LocalContext.current
+    val bitmap = remember{ mutableStateOf<Bitmap?>(null) }
+    val context = LocalContext.current
 
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()){uri : Uri? ->
         // image uri in here yes
@@ -120,7 +121,7 @@ fun InputData(){
         Spacer(modifier = Modifier.padding(top = 10.dp))
         Button(
             onClick = {
-
+                launcher.launch("image/*")
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -130,11 +131,11 @@ fun InputData(){
         }
 
         bitmap.value?.let { bitmap ->
-            /*Image(
+            Image(
                 bitmap = bitmap.asImageBitmap(),
                 contentDescription = null,
-                modifier =
-            )*/
+                modifier = Modifier.size(400.dp)
+            )
         }
 
     }
