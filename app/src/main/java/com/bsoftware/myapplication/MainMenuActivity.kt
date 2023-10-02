@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
@@ -40,7 +41,7 @@ class MainMenuActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ShowPhotoShopData(dataviewmodel,this)
+                    ShowPhotoShopData(dataviewmodel = dataviewmodel, lifecycleOwner = this)
                 }
             }
         }
@@ -49,47 +50,44 @@ class MainMenuActivity : ComponentActivity() {
 
 @Composable
 fun ShowPhotoShopData(dataviewmodel : PhotoShopDataViewModelClass,lifecycleOwner: LifecycleOwner){
+   var titledata : String?
+   var descdata : String?
+   var pricedata : String?
+   var photo     : String?
 
-    var titleproduct : String?
-    var descproduct  : String?
-    var priceproduct : String?
-    var photo        : String?
+   val itemdata : MutableList<PhotoProductDataClass> = mutableListOf()
 
+   dataviewmodel.PhotoshopData.observe(lifecycleOwner, Observer {photoData ->
+       for(data in photoData){
+           titledata = data.titleProduct
+           descdata = data.descProduct
+           pricedata = data.priceProduct
+           photo = data.photo
 
-    LazyColumn{
-        dataviewmodel.PhotoshopData.observe(lifecycleOwner, Observer {photoshopdata ->
-            for(dataPhoto in photoshopdata){
-                titleproduct = dataPhoto.titleProduct
-                descproduct = dataPhoto.descProduct
-                priceproduct = dataPhoto.priceProduct
-                photo = dataPhoto.photo
+           Log.d("data",titledata!!)
+           Log.d("data",descdata!!)
+           Log.d("data",pricedata!!)
+           Log.d("data",photo!!)
 
-                Log.d("data",titleproduct!!)
-                Log.d("data",descproduct!!)
-                Log.d("data",priceproduct!!)
-                Log.d("data",photo!!)
+           itemdata.add(data)
 
-                items(dataPhoto.id!!){ id ->
-                    Card(
-                        modifier = Modifier.size(width = 200.dp, height = 200.dp)
-                    ) {
-                       Column {
-                           Text(text = titleproduct!!)
-                           Text(text = descproduct!!)
-                           Text(text = priceproduct!!)
-                           Text(text = photo!!)
-                       }
-                    }
-                }
-            }
-        })
+       }
+   })
+    Column {
+        for(x in itemdata.iterator()){
+            Text(text = x.titleProduct!!)
+            Text(text = x.descProduct!!)
+            Text(text = x.priceProduct!!)
+            Text(text = x.photo!!)
+        }
     }
+    dataviewmodel.getPhotoShopData()
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview3() {
     MyApplicationTheme {
-        //showPhotoShopData()
+
     }
 }

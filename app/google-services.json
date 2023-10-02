@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146087383954",
+    "project_id": "photoshopproject-9c154",
+    "storage_bucket": "photoshopproject-9c154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146087383954:android:5fdf84d3102bbe8c83274b",
+        "android_client_info": {
+          "package_name": "com.bsoftware.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB-IpZ3nzOnn-6dCgCOtIl2GiSZdSjN38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

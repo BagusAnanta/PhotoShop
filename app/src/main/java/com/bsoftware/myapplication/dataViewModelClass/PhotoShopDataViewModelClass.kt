@@ -10,6 +10,7 @@ import com.bsoftware.myapplication.dataClass.PhotoProductDataClass
 import com.bsoftware.myapplication.retrofit.RetrofitInit
 import com.bsoftware.myapplication.retrofit.RetrofitInitPhotoShop
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class PhotoShopDataViewModelClass : ViewModel(){
@@ -18,8 +19,6 @@ class PhotoShopDataViewModelClass : ViewModel(){
     private val _PhotoShopData = MutableLiveData<List<PhotoProductDataClass>>()
     val PhotoshopData : LiveData<List<PhotoProductDataClass>> = _PhotoShopData
 
-    var items : List<PhotoProductDataClass> = emptyList()
-
 
     fun getPhotoShopData(){
         val TAG = "DataViewModel Exception"
@@ -27,7 +26,6 @@ class PhotoShopDataViewModelClass : ViewModel(){
             try{
                 val fetchPhotoShop = apiInterface.getData()
                 _PhotoShopData.postValue(fetchPhotoShop)
-                items = fetchPhotoShop
             } catch (e : Exception){
                 // Connection Lost
                 Log.e(TAG,e.toString())
