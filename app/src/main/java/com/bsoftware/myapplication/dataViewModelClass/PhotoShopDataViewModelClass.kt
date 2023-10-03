@@ -19,6 +19,8 @@ class PhotoShopDataViewModelClass : ViewModel(){
     private val _PhotoShopData = MutableLiveData<List<PhotoProductDataClass>>()
     val PhotoshopData : LiveData<List<PhotoProductDataClass>> = _PhotoShopData
 
+    val items : MutableList<PhotoProductDataClass> = mutableListOf()
+
 
     fun getPhotoShopData(){
         val TAG = "DataViewModel Exception"
@@ -32,6 +34,7 @@ class PhotoShopDataViewModelClass : ViewModel(){
             }
         }
     }
+
 
     fun insertPhotoShopData(titleProduct : String?,descProduct : String?,priceProduct : String?,photo : String?){
         val TAG = "InsertDataResult"

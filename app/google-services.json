@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "146087383954",
-    "project_id": "photoshopproject-9c154",
-    "storage_bucket": "photoshopproject-9c154.appspot.com"
+    "project_number": "727057820577",
+    "project_id": "photoshopapps-f086d",
+    "storage_bucket": "photoshopapps-f086d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:146087383954:android:5fdf84d3102bbe8c83274b",
+        "mobilesdk_app_id": "1:727057820577:android:05f61019e66e967fd539e0",
         "android_client_info": {
           "package_name": "com.bsoftware.myapplication"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAB-IpZ3nzOnn-6dCgCOtIl2GiSZdSjN38"
+          "current_key": "AIzaSyCOTsQWlMDWLp8kQE1U9fTHZHCOj70Xw_8"
         }
       ],
       "services": {
