@@ -3,5 +3,6 @@
     <string name="title_activity_log_in">LogInActivity</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>
     <string name="title_activity_upload_product">UploadProduct</string>
+    <string name="title_activity_option_login">OptionLogin</string>
 
 </resources>

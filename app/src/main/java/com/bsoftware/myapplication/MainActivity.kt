@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,6 +19,8 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -30,8 +33,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -72,7 +78,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: LifecycleOwner){
+fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelClass(), lifeCycleOwner: LifecycleOwner){
     var username by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
 
@@ -90,7 +96,11 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: Life
             .fillMaxHeight()
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
-        TextField(
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "LogoContain"
+        )
+        OutlinedTextField(
             value = username,
             onValueChange = {username = it},
             label = {
@@ -98,10 +108,10 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: Life
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)
         )
         Spacer(modifier = Modifier.padding(top = 10.dp))
-        TextField(
+        OutlinedTextField(
             value = password,
             onValueChange = {password = it},
             label = {
@@ -109,10 +119,32 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: Life
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp)
         )
         Spacer(modifier = Modifier.padding(top = 10.dp))
-        Button(
+
+        val forgetPass = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    color = colorResource(id = R.color.black),
+                    fontSize = 15.sp
+                )
+            ){
+                Text(text = "Forget Password ?")
+            }
+        }
+
+        ClickableText(
+            text = forgetPass,
+            onClick = {/*TODO*/},
+            modifier = Modifier.fillMaxWidth(),
+            style = TextStyle(
+                textAlign = TextAlign.End,
+                fontSize = 15.sp
+            )
+        )
+
+        OutlinedButton(
             onClick = {
                 dataViewModel.Datauser.observe(lifeCycleOwner, Observer { datauser ->
                     for(datauserlogin in datauser){
@@ -135,7 +167,7 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: Life
                 .fillMaxWidth()
                 .padding(5.dp)
         ) {
-            Text(text = "Login")
+            Text(text = "Sign In")
         }
 
         val signUpLink = buildAnnotatedString {
@@ -145,7 +177,7 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: Life
                     fontSize = 15.sp
                 )
             ){
-                append("No Have Account ?")
+                append("Don't have an account ?")
             }
 
             pushStringAnnotation(tag = "sign up", annotation = "")
@@ -155,7 +187,7 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass, lifeCycleOwner: Life
                     fontSize = 15.sp
                 )
             ){
-                append(" Sign up")
+                append(" Get Started")
             }
         }
 
@@ -182,7 +214,11 @@ fun LoginUser(){
             .fillMaxHeight()
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
-        TextField(
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "LogoContain"
+        )
+        OutlinedTextField(
             value = username,
             onValueChange = {username = it},
             label = {
@@ -190,10 +226,10 @@ fun LoginUser(){
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)
         )
         Spacer(modifier = Modifier.padding(top = 10.dp))
-        TextField(
+        OutlinedTextField(
             value = password,
             onValueChange = {password = it},
             label = {
@@ -201,10 +237,32 @@ fun LoginUser(){
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp)
         )
         Spacer(modifier = Modifier.padding(top = 10.dp))
-        Button(
+
+        val forgetPass = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    color = colorResource(id = R.color.black),
+                    fontSize = 15.sp
+                )
+            ){
+                Text(text = "Forget Password ?")
+            }
+        }
+
+        ClickableText(
+            text = forgetPass,
+            onClick = {/*TODO*/},
+            modifier = Modifier.fillMaxWidth(),
+            style = TextStyle(
+                textAlign = TextAlign.End,
+                fontSize = 15.sp
+            )
+        )
+
+        OutlinedButton(
             onClick = {
 
             },
@@ -222,7 +280,7 @@ fun LoginUser(){
                     fontSize = 15.sp
                 )
             ){
-                append("No Have Account ?")
+                append("Don't have an account ?")
             }
 
             pushStringAnnotation(tag = "sign up", annotation = "")
@@ -232,7 +290,7 @@ fun LoginUser(){
                     fontSize = 15.sp
                 )
             ){
-                append(" Sign up")
+                append(" Get Started")
             }
         }
 
