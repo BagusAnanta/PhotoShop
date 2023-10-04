@@ -4,5 +4,14 @@
     <string name="title_activity_main_menu">MainMenuActivity</string>
     <string name="title_activity_upload_product">UploadProduct</string>
     <string name="title_activity_option_login">Cando</string>
+    <string name="title_activity_our_product">OurProduct</string>
+    <string name="title_activity_photo_graphic_product_list">PhotoGraphicProductList</string>
+    <string name="title_activity_grapic_desain_product">GrapicDesainProduct</string>
+    <string name="title_activity_video_graph_product">VideoGraphProduct</string>
+    <string name="title_activity_check_out_product">CheckOutProduct</string>
+    <string name="kode_pesanan">Kode Pesanan : %s</string>
+    <string name="tanggal_pesanan">Tanggal Pesanan : %s</string>
+    <string name="nama_pemesan">Nama Pemesan : %s</string>
+    <string name="nomor_handphone">Nomor Handphone : %s</string>
 
 </resources>
