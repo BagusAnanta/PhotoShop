@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">MyApplication</string>
+    <string name="app_name">Cando</string>
     <string name="title_activity_log_in">LogInActivity</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>
     <string name="title_activity_upload_product">UploadProduct</string>
-    <string name="title_activity_option_login">OptionLogin</string>
+    <string name="title_activity_option_login">Cando</string>
 
 </resources>
