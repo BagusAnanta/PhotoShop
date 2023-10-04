@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
@@ -130,7 +131,12 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelC
                     fontSize = 15.sp
                 )
             ){
-                Text(text = "Forget Password ?")
+                Text(
+                    text = "Forget Password ?",
+                    textAlign = TextAlign.End,
+                    fontSize = 15.sp,
+                    modifier = Modifier.fillMaxWidth().padding(end = 20.dp)
+                )
             }
         }
 
@@ -165,7 +171,8 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelC
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(5.dp)
+                .padding(start = 25.dp,end = 25.dp, top = 25.dp, bottom = 5.dp)
+                .size(45.dp,45.dp)
         ) {
             Text(text = "Sign In")
         }
@@ -248,7 +255,12 @@ fun LoginUser(){
                     fontSize = 15.sp
                 )
             ){
-                Text(text = "Forget Password ?")
+                Text(
+                    text = "Forget Password ?",
+                    textAlign = TextAlign.End,
+                    fontSize = 15.sp,
+                    modifier = Modifier.fillMaxWidth().padding(end = 20.dp)
+                )
             }
         }
 
@@ -268,7 +280,8 @@ fun LoginUser(){
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(5.dp)
+                .padding(start = 25.dp,end = 25.dp, top = 25.dp, bottom = 5.dp)
+                .size(45.dp,45.dp)
         ) {
             Text(text = "Login")
         }
@@ -306,7 +319,7 @@ fun LoginUser(){
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview() {
+fun LoginPreview() {
     MyApplicationTheme {
         LoginUser()
     }

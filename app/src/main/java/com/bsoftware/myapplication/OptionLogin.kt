@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class OptionLogin : ComponentActivity() {
@@ -36,7 +37,16 @@ class OptionLogin : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    OptionLoginUser()
+                    val activity = (LocalContext.current as Activity)
+                    val context = LocalContext.current
+                    val sharepreference = SharePreference(activity)
+                    if(sharepreference.getLoginState()){
+                        // if a true we continue in main menu
+                        context.startActivity(Intent(context,MainMenuActivity::class.java))
+                        activity.finish()
+                    } else {
+                        OptionLoginUser()
+                    }
                 }
             }
         }
