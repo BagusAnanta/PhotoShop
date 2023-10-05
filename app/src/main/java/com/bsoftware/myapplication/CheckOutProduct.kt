@@ -1,6 +1,7 @@
 package com.bsoftware.myapplication
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -53,6 +54,7 @@ class CheckOutProduct : ComponentActivity() {
 
 @Composable
 fun CheckOutConfirmProduct() {
+    val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
     val sharepref = SharePreference(activity)
     val generateID = GenerateIDProduct()
@@ -173,10 +175,15 @@ fun CheckOutConfirmProduct() {
                     tanggalPesanan.toString(),
                     "PhotoGraphy"
                 )
+
+                // intent into ConfirmResult
+                context.startActivity(Intent(context,ConfirmResult::class.java))
+                activity.finish()
             },
+
             modifier = Modifier.padding(top = 20.dp, start = 10.dp,end = 10.dp).fillMaxWidth()
         ) {
-            Text("Get Started")
+            Text("Confirm Order")
         }
     }
 }

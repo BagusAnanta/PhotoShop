@@ -16,6 +16,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ConfirmResult"
+            android:exported="false"
+            android:label="@string/title_activity_confirm_result"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
             android:name=".CheckOutProduct"
             android:exported="false"
             android:label="@string/title_activity_check_out_product"

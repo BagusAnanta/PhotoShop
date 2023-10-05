@@ -13,5 +13,6 @@
     <string name="tanggal_pesanan">Tanggal Pesanan : %s</string>
     <string name="nama_pemesan">Nama Pemesan : %s</string>
     <string name="nomor_handphone">Nomor Handphone : %s</string>
+    <string name="title_activity_confirm_result">ConfirmResult</string>
 
 </resources>
