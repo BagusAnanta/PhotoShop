@@ -1,9 +1,11 @@
 package com.bsoftware.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +55,11 @@ class VideoGraphProduct : ComponentActivity() {
 @Composable
 fun VideoGraphicProduct() {
     var search by remember { mutableStateOf("") }
+    val videoGraphTitle = "Video Graphic"
+
+    val context = LocalContext.current
+    val intent = Intent(context,CheckOutProduct::class.java)
+    intent.putExtra("videoGraphic",videoGraphTitle)
 
     Column(modifier = Modifier.padding(start = 20.dp,end = 20.dp,top = 20.dp).fillMaxWidth()) {
         Row{
@@ -93,13 +101,23 @@ fun VideoGraphicProduct() {
                 modifier = Modifier.fillMaxWidth()
             ){
                 Card(
-                    modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f)
+                    modifier = Modifier
+                        .size(160.dp,200.dp)
+                        .fillMaxWidth(0.5f)
+                        .clickable {
+                            context.startActivity(intent)
+                        }
                 ) {
 
                 }
 
                 Card(
-                    modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f)
+                    modifier = Modifier
+                        .size(160.dp,200.dp)
+                        .fillMaxWidth(0.5f)
+                        .clickable {
+                            context.startActivity(intent)
+                        }
                 ) {
 
                 }
@@ -110,20 +128,36 @@ fun VideoGraphicProduct() {
                 modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
             ){
                 Card(
-                    modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f)
+                    modifier = Modifier
+                        .size(160.dp,200.dp)
+                        .fillMaxWidth(0.5f)
+                        .clickable {
+                            context.startActivity(intent)
+                        }
                 ) {
 
                 }
 
                 Card(
-                    modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f)
+                    modifier = Modifier
+                        .size(160.dp,200.dp)
+                        .fillMaxWidth(0.5f)
+                        .clickable {
+                            context.startActivity(intent)
+                        }
                 ) {
 
                 }
             }
 
             Card(
-                modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f).padding(top = 20.dp)
+                modifier = Modifier
+                    .size(160.dp,200.dp)
+                    .fillMaxWidth(0.5f)
+                    .padding(top = 20.dp)
+                    .clickable {
+                        context.startActivity(intent)
+                    }
             ) {
 
             }

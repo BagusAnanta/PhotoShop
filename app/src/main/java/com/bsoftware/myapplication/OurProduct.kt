@@ -1,9 +1,11 @@
 package com.bsoftware.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +47,7 @@ class OurProduct : ComponentActivity() {
 
 @Composable
 fun OurProductShow() {
+    val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -79,20 +83,36 @@ fun OurProductShow() {
                 modifier = Modifier.fillMaxWidth()
             ){
                 Card(
-                    modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f)
+                    modifier = Modifier
+                        .size(160.dp,200.dp)
+                        .fillMaxWidth(0.5f)
+                        .clickable {
+                            // intent into photographic
+                            context.startActivity(Intent(context,PhotoGraphicProductList::class.java))
+                        }
                 ) {
 
                 }
 
                 Card(
-                    modifier = Modifier.size(160.dp,200.dp).fillMaxWidth(0.5f)
+                    modifier = Modifier
+                        .size(160.dp,200.dp)
+                        .fillMaxWidth(0.5f)
+                        .clickable {
+                            context.startActivity(Intent(context,GrapicDesainProduct::class.java))
+                        }
                 ) {
 
                 }
             }
 
             Card(
-                modifier = Modifier.size(500.dp,200.dp).padding(top = 20.dp)
+                modifier = Modifier
+                    .size(500.dp,200.dp)
+                    .padding(top = 20.dp)
+                    .clickable {
+                        context.startActivity(Intent(context,VideoGraphProduct::class.java))
+                    }
             ) {
 
             }

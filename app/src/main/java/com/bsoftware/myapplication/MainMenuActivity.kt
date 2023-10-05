@@ -1,5 +1,6 @@
 package com.bsoftware.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Layout.Alignment
 import android.util.Log
@@ -76,6 +77,7 @@ class MainMenuActivity : ComponentActivity() {
 
 @Composable
 fun ShowMainMenu(){
+    val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -169,7 +171,11 @@ fun ShowMainMenu(){
 
             ClickableText(
                 text = seeAll,
-                onClick = {/*TODO*/},
+                onClick = {
+                   //intent into our product
+                    context.startActivity(Intent(context,OurProduct::class.java))
+
+                },
                 modifier = Modifier.fillMaxWidth(),
                 style = TextStyle(
                     textAlign = TextAlign.End,
@@ -218,7 +224,10 @@ fun ShowMainMenu(){
 
                 ClickableText(
                     text = startBrand,
-                    onClick = {/*TODO*/},
+                    onClick = {
+                        // intent into Graphic Design
+                              context.startActivity(Intent(context,GrapicDesainProduct::class.java))
+                    },
                 )
             }
             Image(
