@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dateFormat.DateFormat
+import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.generateID.GenerateIDProduct
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
@@ -158,6 +160,22 @@ fun CheckOutConfirmProduct() {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 10.dp)
             )
+        }
+        OutlinedButton(
+            onClick = {
+                // we sve a data in here and exit into next page
+                val firebase = FireBase()
+                firebase.initDatabase()
+                firebase.writeDataCheckOut(
+                    kodePesanan.toString(),
+                    namaPemesan.toString(),
+                    nomorHandphone.toString(),
+                    tanggalPesanan.toString()
+                )
+            },
+            modifier = Modifier.padding(top = 20.dp, start = 10.dp,end = 10.dp).fillMaxWidth()
+        ) {
+            Text("Get Started")
         }
     }
 }
