@@ -170,7 +170,8 @@ fun CheckOutConfirmProduct() {
                     kodePesanan.toString(),
                     namaPemesan.toString(),
                     nomorHandphone.toString(),
-                    tanggalPesanan.toString()
+                    tanggalPesanan.toString(),
+                    "PhotoGraphy"
                 )
             },
             modifier = Modifier.padding(top = 20.dp, start = 10.dp,end = 10.dp).fillMaxWidth()
