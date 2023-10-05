@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -31,9 +32,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
@@ -62,6 +68,8 @@ class SignUpActivity : ComponentActivity() {
 fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var numberTelp by remember { mutableStateOf("") }
 
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
@@ -77,6 +85,26 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = "LogoContain"
+        )
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = {
+                Text(text = "Your real name")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)
+        )
+        OutlinedTextField(
+            value = numberTelp,
+            onValueChange = { numberTelp = it },
+            label = {
+                Text(text = "Your number phone (use WhatsApp number)")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)
         )
         OutlinedTextField(
             value = username,
@@ -104,6 +132,8 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
             onClick = {
                 // insert data in here, after that we intent to main menu
                 dataviewmodel.insertDataLogin(username,password)
+                sharepreference.setName(name)
+                sharepreference.setPhoneNum(numberTelp)
                 sharepreference.setLoginState(true)
 
                 // intent in here into mainmenu
@@ -117,6 +147,37 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
         ) {
             Text(text = "Sign Up")
         }
+
+        val signUpLink = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    color = colorResource(id = R.color.black),
+                    fontSize = 15.sp
+                )
+            ){
+                append("Already have an account ?")
+            }
+
+            pushStringAnnotation(tag = "sign up", annotation = "")
+            withStyle(
+                style = SpanStyle(
+                    color = colorResource(id = R.color.purple_200),
+                    fontSize = 15.sp
+                )
+            ){
+                append(" Sign in here")
+            }
+        }
+
+        ClickableText(
+            text = signUpLink,
+            onClick ={offset ->
+                signUpLink.getStringAnnotations(tag = "sign up", start = offset, end = offset)
+                // intent into sign up
+                context.startActivity(Intent(context,SignUpActivity::class.java))
+                activity.finish()
+            }
+        )
     }
 }
 

@@ -1,5 +1,6 @@
 package com.bsoftware.myapplication
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,12 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bsoftware.myapplication.dateFormat.DateFormat
+import com.bsoftware.myapplication.generateID.GenerateIDProduct
+import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class CheckOutProduct : ComponentActivity() {
@@ -46,10 +51,15 @@ class CheckOutProduct : ComponentActivity() {
 
 @Composable
 fun CheckOutConfirmProduct() {
-    var kodePesanan : Any? = null
-    var tanggalPesanan : Any? = null
-    var namaPemesan : Any? = null
-    var nomorHandphone : Any? = null
+    val activity = (LocalContext.current as Activity)
+    val sharepref = SharePreference(activity)
+    val generateID = GenerateIDProduct()
+    val dateNow = DateFormat()
+
+    val kodePesanan : Any = generateID.generateIDNumber(10)
+    val tanggalPesanan : Any = dateNow.getDate()
+    val namaPemesan : Any? = sharepref.getName()
+    val nomorHandphone : Any? = sharepref.getPhoneNum()
 
 
     Column(modifier = Modifier
@@ -129,12 +139,12 @@ fun CheckOutConfirmProduct() {
             modifier = Modifier.padding(top = 20.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.kode_pesanan,kodePesanan!!),
+                text = stringResource(id = R.string.kode_pesanan,kodePesanan),
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 10.dp)
             )
             Text(
-                text = stringResource(id = R.string.tanggal_pesanan,tanggalPesanan!!),
+                text = stringResource(id = R.string.tanggal_pesanan,tanggalPesanan),
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 10.dp)
             )

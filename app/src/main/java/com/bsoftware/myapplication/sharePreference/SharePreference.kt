@@ -8,7 +8,6 @@ class SharePreference(var activity : Activity) {
 
     private val sharePreference = activity.getSharedPreferences("IsLoginState", Context.MODE_PRIVATE)
     private val shareEdit = sharePreference.edit()
-    private val loginKey : String = "onLoginState"
 
 
     fun setLoginState(isLogin : Boolean){
@@ -18,6 +17,31 @@ class SharePreference(var activity : Activity) {
 
     fun getLoginState() : Boolean{
         return sharePreference.getBoolean(loginKey,false)
+    }
+
+
+    // function for get name and numberphone
+    fun setName(name : String){
+        shareEdit.putString(nameKey,name)
+        shareEdit.commit()
+    }
+
+    fun getName() : String?{
+        return sharePreference.getString(nameKey,"username")
+    }
+
+    fun setPhoneNum(phoneNum : String){
+        shareEdit.putString(phoneKey,phoneNum)
+        shareEdit.commit()
+    }
+
+    fun getPhoneNum() : String?{
+        return sharePreference.getString(phoneKey,"phonenum")
+    }
+    companion object{
+        private val loginKey : String = "onLoginState"
+        private val nameKey : String = "nameFully"
+        private val phoneKey : String = "numphoneKey"
     }
 
 }
