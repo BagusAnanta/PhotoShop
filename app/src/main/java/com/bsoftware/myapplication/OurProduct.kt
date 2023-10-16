@@ -9,10 +9,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,11 +58,12 @@ fun OurProductShow() {
         modifier = Modifier.fillMaxWidth()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.logoutama),
             contentDescription = "IconLogo",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(20.dp)
+                .size(80.dp, 80.dp),
             alignment = Alignment.Center
         )
 
@@ -76,47 +83,68 @@ fun OurProductShow() {
         }
 
         Column (
-            modifier = Modifier.padding(start = 20.dp,end = 20.dp,top = 20.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)
+                .fillMaxWidth()
         ){
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ){
-                Card(
+                Image(
+                    painter = painterResource(id = R.drawable.productfoto),
+                    contentDescription = "photoproduct",
                     modifier = Modifier
                         .size(160.dp,200.dp)
-                        .fillMaxWidth(0.5f)
+                        .clip(RoundedCornerShape(16.dp))
                         .clickable {
-                            // intent into photographic
-                            context.startActivity(Intent(context,PhotoGraphicProductList::class.java))
+                            context.startActivity(
+                                Intent(
+                                    context,
+                                    PhotoGraphicProductList::class.java
+                                )
+                            )
                         }
-                ) {
+                        .fillMaxWidth(0.5f),
+                    contentScale = ContentScale.Crop,
+                )
 
-                }
-
-                Card(
+                Image(
+                    painter = painterResource(id = R.drawable.productdesain),
+                    contentDescription = "photoproduct",
                     modifier = Modifier
                         .size(160.dp,200.dp)
-                        .fillMaxWidth(0.5f)
+                        .clip(RoundedCornerShape(16.dp))
                         .clickable {
-                            context.startActivity(Intent(context,GrapicDesainProduct::class.java))
+                            context.startActivity(
+                                Intent(
+                                    context,
+                                    GrapicDesainProduct::class.java)
+                            )
                         }
-                ) {
-
-                }
+                        .fillMaxWidth(0.5f),
+                        contentScale = ContentScale.Crop,
+                )
             }
 
-            Card(
+            Image(
+                painter = painterResource(id = R.drawable.productvideo),
+                contentDescription = "photoproduct",
                 modifier = Modifier
                     .size(500.dp,200.dp)
-                    .padding(top = 20.dp)
+                    .clip(RoundedCornerShape(16.dp))
                     .clickable {
-                        context.startActivity(Intent(context,VideoGraphProduct::class.java))
+                        context.startActivity(
+                            Intent(
+                                context,
+                                VideoGraphProduct::class.java)
+                        )
                     }
-            ) {
-
-            }
-
+                    .fillMaxWidth(0.5f)
+                    .padding(top = 30.dp)
+                    .aspectRatio(16f/9f)
+                    .padding(start = 10.dp),
+            )
         }
 
     }

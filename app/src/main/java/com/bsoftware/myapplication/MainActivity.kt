@@ -222,8 +222,9 @@ fun LoginUser(){
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "LogoContain"
+            painter = painterResource(id = R.drawable.logoutama),
+            contentDescription = "LogoContain",
+            modifier = Modifier.size(200.dp,100.dp)
         )
         OutlinedTextField(
             value = username,

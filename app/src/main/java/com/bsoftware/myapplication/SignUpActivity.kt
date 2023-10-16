@@ -83,8 +83,9 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "LogoContain"
+            painter = painterResource(id = R.drawable.logoutama),
+            contentDescription = "LogoContain",
+            modifier = Modifier.size(200.dp,100.dp)
         )
         OutlinedTextField(
             value = name,
@@ -171,7 +172,7 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
 
         ClickableText(
             text = signUpLink,
-            onClick ={offset ->
+            onClick ={ offset ->
                 signUpLink.getStringAnnotations(tag = "sign up", start = offset, end = offset)
                 // intent into sign up
                 context.startActivity(Intent(context,SignUpActivity::class.java))

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -63,8 +64,9 @@ fun OptionLoginUser(){
         modifier = Modifier.fillMaxHeight().wrapContentHeight(Alignment.CenterVertically)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.logoutama),
             contentDescription = "LogoContain",
+            modifier = Modifier.size(200.dp,100.dp)
         )
 
         OutlinedButton(
@@ -74,7 +76,9 @@ fun OptionLoginUser(){
                 activity.finish()
 
             },
-            modifier = Modifier.padding(top = 20.dp, start = 10.dp,end = 10.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(top = 20.dp, start = 10.dp,end = 10.dp)
+                .fillMaxWidth()
         ) {
             Text("Get Started")
         }

@@ -82,11 +82,12 @@ fun ShowMainMenu(){
         modifier = Modifier.fillMaxWidth()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.logoutama),
             contentDescription = "Logo Image",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(20.dp)
+                .size(80.dp,80.dp),
             alignment = androidx.compose.ui.Alignment.Center
         )
 
@@ -107,14 +108,16 @@ fun ShowMainMenu(){
 
         Card(
             modifier = Modifier
-                .size(width = 500.dp, height = 210.dp)
+                .size(width = 500.dp, height = 200.dp)
                 .padding(20.dp)
         ) {
             Row{
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background) ,
+                    painter = painterResource(id = R.drawable.logoutama) ,
                     contentDescription = "ImageCard",
-                    modifier = Modifier.padding(top = 30.dp, end = 10.dp, start = 10.dp)
+                    modifier = Modifier
+                        .padding(top = 30.dp, end = 10.dp, start = 10.dp)
+                        .size(80.dp,80.dp)
                 )
                 Column(
                     modifier = Modifier.padding(top = 10.dp)
