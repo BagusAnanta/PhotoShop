@@ -1,6 +1,7 @@
 package com.bsoftware.myapplication.firebaseCloud
 
 import android.app.Activity
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,6 +31,10 @@ class FirebaseAuthentication {
                 } else {
                     // If sign in fails, display a message to the user.
                     onFailed()
+                    // check a exception inhere
+
+                    val exception = task.exception
+                    Log.e("Create Data User Exception At :",exception.toString())
                 }
             }
     }
@@ -51,6 +56,7 @@ class FirebaseAuthentication {
                 } else {
                     // If sign in fails, display a message to the user.
                     onFail()
+
                 }
             }
     }
