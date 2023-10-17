@@ -3,10 +3,14 @@ package com.bsoftware.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -36,7 +40,9 @@ class AdminReport : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val firebase = FireBase()
@@ -75,6 +81,7 @@ fun AdminReportList(databasepref : DatabaseReference) {
     LazyColumn{
         items(projectList) {project ->
             // card in here
+            CardShowAdminProjectList(checkoutProduct = project)
         }
     }
 }
@@ -82,29 +89,37 @@ fun AdminReportList(databasepref : DatabaseReference) {
 @Composable
 fun CardShowAdminProjectList(checkoutProduct : CheckOutDataClass){
 
-    
     Card(
-        modifier = Modifier.size(500.dp,200.dp)
+        modifier = Modifier
+            .size(500.dp, 170.dp)
+            .padding(10.dp)
     ){
-        Text(
-            text = stringResource(id = R.string.kode_pesanan,checkoutProduct.id)
-        )
+        Column(
+            modifier = Modifier.padding(20.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.kode_pesanan,checkoutProduct.id),
+            )
 
-        Text(
-            text = stringResource(id = R.string.nama_pemesan,checkoutProduct.name)
-        )
+            Text(
+                text = stringResource(id = R.string.nama_pemesan,checkoutProduct.name),
+                modifier = Modifier.padding(top = 5.dp)
+            )
 
-        Text(
-            text = stringResource(id = R.string.tanggal_pesanan,checkoutProduct.date)
-        )
+            Text(
+                text = stringResource(id = R.string.tanggal_pesanan,checkoutProduct.date),
+                modifier = Modifier.padding(top = 5.dp)
+            )
 
-        Text(
-            text = stringResource(id = R.string.nomor_handphone,checkoutProduct.numberPhone)
-        )
+            Text(
+                text = stringResource(id = R.string.nomor_handphone,checkoutProduct.numberPhone),
+                modifier = Modifier.padding(top = 5.dp)
+            )
+        }
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 fun AdminReportPreview() {
     MyApplicationTheme {

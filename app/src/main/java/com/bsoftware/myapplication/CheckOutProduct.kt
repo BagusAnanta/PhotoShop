@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -14,6 +16,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -22,6 +28,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -42,7 +51,9 @@ class CheckOutProduct : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     CheckOutConfirmProduct()
@@ -65,126 +76,153 @@ fun CheckOutConfirmProduct() {
     val namaPemesan : Any? = sharepref.getName()
     val nomorHandphone : Any? = sharepref.getPhoneNum()
 
-
-    Column(modifier = Modifier
-        .padding(start = 20.dp, end = 20.dp, top = 20.dp)
-        .fillMaxWidth()) {
-        Row{
-            Column{
-                Text(
-                    text = "Project Choose",
-                    fontSize = 25.sp
-                )
-                Text(
-                    text = "Project Check Out",
-                    fontSize = 15.sp
-                )
-            }
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "LogoImage",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(Alignment.End)
-            )
-        }
-
-        Text(
-            text = "Project Review",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 30.dp)
+    Box(modifier = Modifier.fillMaxSize()){
+        Image(
+            painter = painterResource(id = R.drawable.backgroundutama),
+            contentDescription = "App Backgroud",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.matchParentSize()
         )
 
-        Card(
-            modifier = Modifier
-                .size(500.dp, 200.dp)
-                .padding(top = 20.dp)
-                .fillMaxSize()
-        ) {
-            Row(
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                Column {
+        Column(modifier = Modifier
+            .padding(start = 20.dp, end = 20.dp, top = 20.dp)
+            .fillMaxWidth()) {
+            Row{
+                Column{
                     Text(
-                        "Photography",
+                        text = "Project Choose",
                         fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold
+                        color = Color.White
                     )
                     Text(
-                        "Product",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        text = "Project Check Out",
+                        fontSize = 15.sp,
+                        color = Color.White
                     )
                 }
-
-                Card(
+                Image(
+                    painter = painterResource(id =  R.drawable.logoutama),
+                    contentDescription = "LogoImage",
                     modifier = Modifier
-                        .size(100.dp, 100.dp)
-                        .padding(start = 10.dp)
-                        .fillMaxSize()
+                        .fillMaxWidth()
+                        .wrapContentWidth(Alignment.End)
+                        .size(80.dp, 80.dp)
+                )
+            }
+
+            Text(
+                text = "Project Review",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 30.dp),
+                color = Color.White
+            )
+
+            Card(
+                modifier = Modifier
+                    .size(500.dp, 200.dp)
+                    .padding(top = 20.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()
                 ) {
-                    Image(painter = painterResource(id = R.drawable.ic_launcher_background), contentDescription = "image tester")
+                    Column() {
+                        Text(
+                            "Photography",
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            "Product",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    Image(
+                        painter = painterResource(id = R.drawable.foodphotography),
+                        contentDescription = "photoproduct",
+                        modifier = Modifier
+                            .size(100.dp, 240.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .clickable {
+                                // click into checkout
+                            }
+                            .fillMaxWidth(0.5f),
+                        contentScale = ContentScale.FillBounds,
+                    )
                 }
+            }
+
+            Text(
+                text = "Data Pemesan",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 30.dp),
+                color = Color.White
+            )
+
+            Column(
+                modifier = Modifier.padding(top = 20.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.kode_pesanan,kodePesanan),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = Color.White
+                )
+                Text(
+                    text = stringResource(id = R.string.tanggal_pesanan,tanggalPesanan),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = Color.White
+                )
+                Text(
+                    text = stringResource(id = R.string.nama_pemesan,namaPemesan!!),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = Color.White
+                )
+                Text(
+                    text = stringResource(id = R.string.nomor_handphone,nomorHandphone!!),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = Color.White
+                )
+            }
+            OutlinedButton(
+                onClick = {
+                    // we sve a data in here and exit into next page
+                    val firebase = FireBase()
+                    firebase.initDatabase()
+                    firebase.writeDataCheckOut(
+                        kodePesanan.toString(),
+                        namaPemesan.toString(),
+                        nomorHandphone.toString(),
+                        tanggalPesanan.toString(),
+                        "PhotoGraphy"
+                    )
+
+                    // intent into ConfirmResult
+                    context.startActivity(Intent(context,ConfirmResult::class.java))
+                    activity.finish()
+                },
+
+                modifier = Modifier
+                    .padding(top = 20.dp, start = 50.dp, end = 50.dp)
+                    .fillMaxWidth(),
+                shape = CutCornerShape(10)
+            ) {
+                Text(
+                    "Confirm Order",
+                     color = Color.White,
+                     fontWeight = FontWeight.Bold
+                )
             }
         }
 
-        Text(
-            text = "Data Pemesan",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 30.dp)
-        )
-
-        Column(
-            modifier = Modifier.padding(top = 20.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.kode_pesanan,kodePesanan),
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 10.dp)
-            )
-            Text(
-                text = stringResource(id = R.string.tanggal_pesanan,tanggalPesanan),
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 10.dp)
-            )
-            Text(
-                text = stringResource(id = R.string.nama_pemesan,namaPemesan!!),
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 10.dp)
-            )
-            Text(
-                text = stringResource(id = R.string.nomor_handphone,nomorHandphone!!),
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 10.dp)
-            )
-        }
-        OutlinedButton(
-            onClick = {
-                // we sve a data in here and exit into next page
-                val firebase = FireBase()
-                firebase.initDatabase()
-                firebase.writeDataCheckOut(
-                    kodePesanan.toString(),
-                    namaPemesan.toString(),
-                    nomorHandphone.toString(),
-                    tanggalPesanan.toString(),
-                    "PhotoGraphy"
-                )
-
-                // intent into ConfirmResult
-                context.startActivity(Intent(context,ConfirmResult::class.java))
-                activity.finish()
-            },
-
-            modifier = Modifier.padding(top = 20.dp, start = 10.dp,end = 10.dp).fillMaxWidth()
-        ) {
-            Text("Confirm Order")
-        }
     }
 }
 

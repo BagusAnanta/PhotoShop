@@ -32,25 +32,4 @@ class FireBase {
             }
     }
 
-    // I Think i can use this later after we make a
-   /* fun getDataCheckOut(){
-
-        val postListener = object  : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val getdata = snapshot.getValue(CheckOutDataClass::class.java)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        }
-        databasepreference.addValueEventListener(postListener)
-    }*/
-
-
-
-
-
-
 }
