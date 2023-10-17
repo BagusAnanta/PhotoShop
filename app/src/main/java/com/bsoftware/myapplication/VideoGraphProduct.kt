@@ -69,7 +69,7 @@ fun VideoGraphicProduct() {
 
     val context = LocalContext.current
     val intent = Intent(context,CheckOutProduct::class.java)
-    intent.putExtra("videoGraphic",videoGraphTitle)
+    intent.putExtra("typeProduct",videoGraphTitle)
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(

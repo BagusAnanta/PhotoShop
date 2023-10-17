@@ -68,7 +68,7 @@ fun GraphicDesignProduct() {
     
     val context = LocalContext.current
     val intent = Intent(context,CheckOutProduct::class.java)
-    intent.putExtra("designGraphic",graphicTitle)
+    intent.putExtra("typeProduct",graphicTitle)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(

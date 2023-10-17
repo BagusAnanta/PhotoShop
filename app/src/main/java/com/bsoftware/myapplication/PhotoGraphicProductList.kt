@@ -69,7 +69,7 @@ fun PhotoProduct() {
     val context = LocalContext.current
 
     val intent = Intent(context,CheckOutProduct::class.java)
-    intent.putExtra("photographic",productTitle)
+    intent.putExtra("typeProduct",productTitle)
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -135,6 +135,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                // click into checkout
+
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,

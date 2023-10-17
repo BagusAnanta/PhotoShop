@@ -214,7 +214,7 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                     append("Already have an account ?")
                 }
 
-                pushStringAnnotation(tag = "sign up", annotation = "")
+                pushStringAnnotation(tag = "sign in", annotation = "")
                 withStyle(
                     style = SpanStyle(
                         color = colorResource(id = R.color.white),
@@ -229,15 +229,14 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
             ClickableText(
                 text = signUpLink,
                 onClick ={ offset ->
-                    signUpLink.getStringAnnotations(tag = "sign up", start = offset, end = offset)
-                    // intent into sign up
-                     context.startActivity(Intent(context,SignUpActivity::class.java))
+                    signUpLink.getStringAnnotations(tag = "sign in", start = offset, end = offset)
+                    // intent into sign in
+                     context.startActivity(Intent(context,MainActivity::class.java))
                      activity.finish()
                 }
             )
         }
     }
-
 }
 
 

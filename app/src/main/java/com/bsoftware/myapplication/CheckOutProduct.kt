@@ -129,6 +129,11 @@ fun CheckOutConfirmProduct() {
                         .fillMaxWidth()
                 ) {
                     Column() {
+                        // you can place intent in here and then you place "when" in here for
+
+                       /* var typeText = when(){
+
+                        }*/
                         Text(
                             "Photography",
                             fontSize = 25.sp,
