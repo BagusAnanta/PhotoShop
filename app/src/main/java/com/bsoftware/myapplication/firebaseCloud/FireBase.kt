@@ -17,7 +17,8 @@ class FireBase {
    private lateinit var databasepreference : DatabaseReference
 
    fun initDatabase() : DatabaseReference{
-      return Firebase.database("https://candoapp-ef10f-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
+       databasepreference = Firebase.database("https://candoapp-ef10f-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
+       return databasepreference
    }
 
     fun writeDataCheckOut(idProject : String,name : String,numberPhone : String,date : String,projectType : String){
