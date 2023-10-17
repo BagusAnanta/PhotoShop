@@ -17,14 +17,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,13 +42,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
+import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
     private val dataviewmodel : LoginDataViewModelClass by viewModels()
+    private val firebaseAuth : FirebaseAuthentication = FirebaseAuthentication()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +63,7 @@ class MainActivity : ComponentActivity() {
                     val activity = (LocalContext.current as Activity)
                     val context = LocalContext.current
                     val sharepreference = SharePreference(activity)
+                    firebaseAuth.initFirebaseAuth()
                     if(sharepreference.getLoginState()){
                         // if a true we continue in main menu
                         context.startActivity(Intent(context,MainMenuActivity::class.java))
@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelClass(), lifeCycleOwner: LifecycleOwner){
-    var username by remember{ mutableStateOf("") }
+    var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
 
     var usernameData : String?
@@ -98,14 +98,15 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelC
             .wrapContentHeight(Alignment.CenterVertically)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "LogoContain"
+            painter = painterResource(id = R.drawable.logoutama),
+            contentDescription = "LogoContain",
+            modifier = Modifier.size(200.dp,100.dp)
         )
         OutlinedTextField(
-            value = username,
-            onValueChange = {username = it},
+            value = email,
+            onValueChange = {email = it},
             label = {
-                Text(text = "Username")
+                Text(text = "Email")
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -152,7 +153,7 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelC
 
         OutlinedButton(
             onClick = {
-                dataViewModel.Datauser.observe(lifeCycleOwner, Observer { datauser ->
+               /* dataViewModel.Datauser.observe(lifeCycleOwner, Observer { datauser ->
                     for(datauserlogin in datauser){
                         usernameData = datauserlogin.username
                         passwordData = datauserlogin.password
@@ -167,7 +168,24 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelC
 
                     }
                 })
-                dataViewModel.getDataLogin()
+                dataViewModel.getDataLogin()*/
+
+                val firebaseAuth = FirebaseAuthentication()
+                firebaseAuth.initFirebaseAuth()
+                firebaseAuth.signInDataUserEmailPass(
+                    email = email,
+                    password = password,
+                    activity = activity,
+                    onSuccess = {
+                        // we gonna intent into mainmenu activity
+                        sharepreference.setLoginState(true)
+                        context.startActivity(Intent(activity,MainMenuActivity::class.java))
+                        activity.finish()
+                    },
+                    onFail = {
+                        Toast.makeText(activity,"SignIn Failed, please try again",Toast.LENGTH_SHORT).show()
+                    }
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -213,8 +231,11 @@ fun LoginUserLogic(dataViewModel : LoginDataViewModelClass = LoginDataViewModelC
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginUser(){
-    var username by remember{ mutableStateOf("") }
+    var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
+    val activity = (LocalContext.current as Activity)
+    val context = LocalContext.current
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -227,10 +248,10 @@ fun LoginUser(){
             modifier = Modifier.size(200.dp,100.dp)
         )
         OutlinedTextField(
-            value = username,
-            onValueChange = {username = it},
+            value = email,
+            onValueChange = {email = it},
             label = {
-                Text(text = "Username")
+                Text(text = "email")
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -276,9 +297,7 @@ fun LoginUser(){
         )
 
         OutlinedButton(
-            onClick = {
-
-            },
+            onClick = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 25.dp,end = 25.dp, top = 25.dp, bottom = 5.dp)

@@ -3,6 +3,7 @@ package com.bsoftware.myapplication
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -41,12 +42,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
+import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
+import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : ComponentActivity() {
 
     private val dataviewmodel : LoginDataViewModelClass by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -66,7 +71,7 @@ class SignUpActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) {
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var numberTelp by remember { mutableStateOf("") }
@@ -108,10 +113,10 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                 .padding(start = 20.dp, end = 20.dp, top = 20.dp)
         )
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
+            value = email,
+            onValueChange = { email = it },
             label = {
-                Text(text = "Username")
+                Text(text = "Email")
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -132,14 +137,29 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
         OutlinedButton(
             onClick = {
                 // insert data in here, after that we intent to main menu
-                dataviewmodel.insertDataLogin(username,password)
-                sharepreference.setName(name)
-                sharepreference.setPhoneNum(numberTelp)
-                sharepreference.setLoginState(true)
+                // in here we gonna change to firebase authentication
 
-                // intent in here into mainmenu
-                context.startActivity(Intent(context,MainMenuActivity::class.java))
-                activity.finish()
+                // dataviewmodel.insertDataLogin(username,password)
+                val firebaseauthdata = FirebaseAuthentication()
+                firebaseauthdata.initFirebaseAuth()
+                firebaseauthdata.createDataUserEmailPass(
+                    email = email,
+                    password = password,
+                    activity = activity,
+                    onSuccess = {
+                        // in here we gonna intent or give toast
+                        sharepreference.setName(name)
+                        sharepreference.setPhoneNum(numberTelp)
+                        sharepreference.setLoginState(true)
+
+                        // intent in here into mainmenu
+                        context.startActivity(Intent(context,MainMenuActivity::class.java))
+                        activity.finish()
+                    },
+                    onFailed = {
+                        Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
+                    }
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()
