@@ -116,9 +116,14 @@ fun OurProductShow() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 context.startActivity(
-                                    Intent(
+                                    /*Intent(
                                         context,
                                         PhotoGraphicProductList::class.java
+                                    )*/
+
+                                    Intent(
+                                        context,
+                                        AdminReport::class.java
                                     )
                                 )
                             }

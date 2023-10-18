@@ -1,6 +1,7 @@
 package com.bsoftware.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -41,8 +42,7 @@ class AdminReport : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState()),
+                        .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val firebase = FireBase()
@@ -66,6 +66,7 @@ fun AdminReportList(databasepref : DatabaseReference) {
                     projectGet?.let{
                         project.add(it)
                     }
+                    Log.d("Data get firebase", projectGet.toString())
                 }
                 projectList = project
             }
@@ -119,7 +120,7 @@ fun CardShowAdminProjectList(checkoutProduct : CheckOutDataClass){
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun AdminReportPreview() {
     MyApplicationTheme {

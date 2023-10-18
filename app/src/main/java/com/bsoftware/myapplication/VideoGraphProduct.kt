@@ -134,6 +134,9 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                // in here we gonna change a id if have
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -147,6 +150,8 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -167,6 +172,8 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -180,6 +187,8 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -194,6 +203,8 @@ fun VideoGraphicProduct() {
                         .clip(RoundedCornerShape(16.dp))
                         .clickable {
                             // click into checkout
+                            intent.putExtra("photoProduct",R.drawable.foodphotography)
+                            context.startActivity(intent)
                         }
                         .fillMaxWidth(0.5f),
                     contentScale = ContentScale.FillBounds,

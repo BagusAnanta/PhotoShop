@@ -23,7 +23,7 @@ class FireBase {
 
     fun writeDataCheckOut(idProject : String,name : String,numberPhone : String,date : String,projectType : String){
         val userCheckOut = CheckOutDataClass(idProject,name,numberPhone,date,projectType)
-        databasepreference.child("checkOut").setValue(userCheckOut)
+        databasepreference.child("checkOut").child(idProject).setValue(userCheckOut)
             .addOnSuccessListener {
                 Log.d("OnDataSaver","Data Complete Insert")
             }

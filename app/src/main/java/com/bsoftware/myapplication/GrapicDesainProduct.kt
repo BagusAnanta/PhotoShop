@@ -41,6 +41,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
+/*
+* for note :
+* 1. Please change a intent getExtra value in product photography
+* 2. please check a code
+* */
+
 class GrapicDesainProduct : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,6 +139,9 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                // in here we gonna intent a drawable int code
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -146,6 +155,8 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -166,6 +177,8 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -179,6 +192,8 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,

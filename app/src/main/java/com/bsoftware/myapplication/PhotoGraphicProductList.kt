@@ -135,7 +135,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                // click into checkout
-
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -149,6 +150,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -169,6 +172,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
@@ -182,6 +187,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,

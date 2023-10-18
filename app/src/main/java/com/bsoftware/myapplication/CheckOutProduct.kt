@@ -76,6 +76,8 @@ fun CheckOutConfirmProduct() {
     val namaPemesan : Any? = sharepref.getName()
     val nomorHandphone : Any? = sharepref.getPhoneNum()
 
+    var typeText : String = "Default"
+
     Box(modifier = Modifier.fillMaxSize()){
         Image(
             painter = painterResource(id = R.drawable.backgroundutama),
@@ -100,14 +102,16 @@ fun CheckOutConfirmProduct() {
                         color = Color.White
                     )
                 }
-                Image(
-                    painter = painterResource(id =  R.drawable.logoutama),
-                    contentDescription = "LogoImage",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                        .size(80.dp, 80.dp)
-                )
+                Intent().extras?.getInt("photoProduct")?.let { painterResource(it) }?.let {
+                    Image(
+                        painter = it,
+                        contentDescription = "LogoImage",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentWidth(Alignment.End)
+                            .size(80.dp, 80.dp)
+                    )
+                }
             }
 
             Text(
@@ -129,13 +133,23 @@ fun CheckOutConfirmProduct() {
                         .fillMaxWidth()
                 ) {
                     Column() {
-                        // you can place intent in here and then you place "when" in here for
+                        /*
+                        * you can place intent in here and then you place "when" in here for choose a product type
+                        * */
 
-                       /* var typeText = when(){
+                        // in here, we gonna get intent extra from intent before and then in hewe we use when for give some option
+                        val intent = Intent().extras?.getString("typeProduct")
+                        typeText = when(intent){
+                            "Photographic" -> "Photographic"
+                            "Design Graphic" -> "Design Graphic"
+                            "Video Graphic" -> "Video Graphic"
 
-                        }*/
+                            // in else branch we use default value for safety
+                            else -> {"Option Product"}
+                        }
+
                         Text(
-                            "Photography",
+                            typeText,
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -199,7 +213,7 @@ fun CheckOutConfirmProduct() {
             }
             OutlinedButton(
                 onClick = {
-                    // we sve a data in here and exit into next page
+                    // we save a data in here and exit into next page
                     val firebase = FireBase()
                     firebase.initDatabase()
                     firebase.writeDataCheckOut(
@@ -207,7 +221,7 @@ fun CheckOutConfirmProduct() {
                         namaPemesan.toString(),
                         nomorHandphone.toString(),
                         tanggalPesanan.toString(),
-                        "PhotoGraphy"
+                        typeText
                     )
 
                     // intent into ConfirmResult
