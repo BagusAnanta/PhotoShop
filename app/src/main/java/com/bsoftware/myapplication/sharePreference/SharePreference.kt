@@ -19,6 +19,21 @@ class SharePreference(var activity : Activity) {
         return sharePreference.getBoolean(loginKey,false)
     }
 
+    fun deleteLoginState(){
+        shareEdit.remove(loginKey)
+        shareEdit.putBoolean(loginKey,false)
+        shareEdit.commit()
+    }
+
+    fun setLoginAdminState(isLogin : Boolean){
+        shareEdit.putBoolean(adminLoginKey,isLogin)
+        shareEdit.commit()
+    }
+
+    fun getLoginAdminState() : Boolean{
+        return sharePreference.getBoolean(adminLoginKey,false)
+    }
+
 
     // function for get name and numberphone
     fun setName(name : String){
@@ -42,6 +57,7 @@ class SharePreference(var activity : Activity) {
         private val loginKey : String = "onLoginState"
         private val nameKey : String = "nameFully"
         private val phoneKey : String = "numphoneKey"
+        private val adminLoginKey : String = "adminKey"
     }
 
 }

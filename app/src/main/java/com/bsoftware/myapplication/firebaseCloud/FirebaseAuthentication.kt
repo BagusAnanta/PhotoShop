@@ -60,4 +60,12 @@ class FirebaseAuthentication {
                 }
             }
     }
+
+    fun getEmail() : String{
+        return auth.currentUser?.email!!
+    }
+
+    fun signOutEmail(){
+        Firebase.auth.signOut()
+    }
 }

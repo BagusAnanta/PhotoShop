@@ -54,6 +54,10 @@ class OptionLogin : ComponentActivity() {
                         // if a true we continue in main menu
                         context.startActivity(Intent(context,MainMenuActivity::class.java))
                         activity.finish()
+                        // if a admin true
+                    } else if(sharepreference.getLoginAdminState()) {
+                        // intent into admin report
+                        context.startActivity(Intent(context,AdminReport::class.java))
                     } else {
                         OptionLoginUser()
                     }

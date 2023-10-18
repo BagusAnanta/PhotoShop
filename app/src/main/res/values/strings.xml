@@ -19,5 +19,6 @@
     <string name="title_activity_confirm_result">ConfirmResult</string>
     <string name="title_activity_admin_report">AdminReport</string>
     <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_admin_login">AdminLoginActivity</string>
 
 </resources>

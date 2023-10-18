@@ -1,5 +1,6 @@
 package com.bsoftware.myapplication
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -34,9 +36,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
+import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class AccountActivity : ComponentActivity() {
+    val firebaseAuth = FirebaseAuthentication()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,7 +51,16 @@ class AccountActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    var activity = (LocalContext as Activity)
+                    val sharePref = SharePreference(activity)
+                    firebaseAuth.initFirebaseAuth()
 
+                    AccountUserData(
+                        nama = sharePref.getName()!!,
+                        email = firebaseAuth.getEmail(),
+                        phoneNum = sharePref.getPhoneNum()!!,
+                        firebaseAuth
+                    )
                 }
             }
         }
@@ -54,7 +68,15 @@ class AccountActivity : ComponentActivity() {
 }
 
 @Composable
-fun AccountUserData(nama : String,email : String,phoneNum : String){
+fun AccountUserData(
+    nama : String,
+    email : String,
+    phoneNum : String,
+    firebaseAuth : FirebaseAuthentication = FirebaseAuthentication()
+){
+
+    val context = LocalContext.current
+
     Box(modifier = Modifier.fillMaxSize()){
         Image(
             painter = painterResource(id = R.drawable.backgroundutama),
@@ -146,7 +168,8 @@ fun AccountUserData(nama : String,email : String,phoneNum : String){
                // button in here
                OutlinedButton(
                    onClick = {
-                       // click in here for get started
+                       // click in here for sign out
+                       firebaseAuth.signOutEmail()
                    },
                    modifier = Modifier
                        .padding(top = 20.dp, start = 30.dp, end = 30.dp)
@@ -166,7 +189,7 @@ fun AccountUserData(nama : String,email : String,phoneNum : String){
                OutlinedButton(
                    onClick = {
                        // click in here for get started
-
+                        context.startActivity(Intent(context,AdminLoginActivity::class.java))
                    },
                    modifier = Modifier
                        .padding(top = 5.dp, start = 30.dp, end = 30.dp)
