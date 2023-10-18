@@ -69,7 +69,7 @@ fun VideoGraphicProduct() {
 
     val context = LocalContext.current
     val intent = Intent(context,CheckOutProduct::class.java)
-    intent.putExtra("typeProduct",videoGraphTitle)
+
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -135,6 +135,7 @@ fun VideoGraphicProduct() {
                             .clickable {
                                 // click into checkout
                                 // in here we gonna change a id if have
+                                intent.putExtra("typeProduct",videoGraphTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -150,6 +151,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",videoGraphTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -172,6 +174,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",videoGraphTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -187,6 +190,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",videoGraphTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -203,6 +207,7 @@ fun VideoGraphicProduct() {
                         .clip(RoundedCornerShape(16.dp))
                         .clickable {
                             // click into checkout
+                            intent.putExtra("typeProduct",videoGraphTitle)
                             intent.putExtra("photoProduct",R.drawable.foodphotography)
                             context.startActivity(intent)
                         }

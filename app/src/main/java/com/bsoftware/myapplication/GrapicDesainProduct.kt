@@ -74,7 +74,6 @@ fun GraphicDesignProduct() {
     
     val context = LocalContext.current
     val intent = Intent(context,CheckOutProduct::class.java)
-    intent.putExtra("typeProduct",graphicTitle)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -140,6 +139,7 @@ fun GraphicDesignProduct() {
                             .clickable {
                                 // click into checkout
                                 // in here we gonna intent a drawable int code
+                                intent.putExtra("typeProduct",graphicTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -155,6 +155,7 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",graphicTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -177,6 +178,7 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",graphicTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -192,6 +194,7 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",graphicTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }

@@ -69,7 +69,6 @@ fun PhotoProduct() {
     val context = LocalContext.current
 
     val intent = Intent(context,CheckOutProduct::class.java)
-    intent.putExtra("typeProduct",productTitle)
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -135,6 +134,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                // click into checkout
+                                intent.putExtra("typeProduct",productTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -150,6 +150,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",productTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -172,6 +173,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",productTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
@@ -187,6 +189,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
+                                intent.putExtra("typeProduct",productTitle)
                                 intent.putExtra("photoProduct",R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
