@@ -20,5 +20,6 @@
     <string name="title_activity_admin_report">AdminReport</string>
     <string name="title_activity_account">AccountActivity</string>
     <string name="title_activity_admin_login">AdminLoginActivity</string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
 
 </resources>

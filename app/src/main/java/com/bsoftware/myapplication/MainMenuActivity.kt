@@ -55,11 +55,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.bsoftware.myapplication.dataClass.PhotoProductDataClass
 import com.bsoftware.myapplication.dataViewModelClass.PhotoShopDataViewModelClass
+import com.bsoftware.myapplication.navBarNavigation.BottomNavigationShow
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class MainMenuActivity : ComponentActivity() {

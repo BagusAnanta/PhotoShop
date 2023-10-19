@@ -69,9 +69,9 @@ class AccountActivity : ComponentActivity() {
 
 @Composable
 fun AccountUserData(
-    nama : String,
-    email : String,
-    phoneNum : String,
+    nama : String = "",
+    email : String = "",
+    phoneNum : String = "",
     firebaseAuth : FirebaseAuthentication = FirebaseAuthentication()
 ){
 
