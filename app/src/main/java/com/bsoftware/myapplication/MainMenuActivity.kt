@@ -268,8 +268,6 @@ fun ShowMainMenu(){
                 )
             }
         }
-
-
     }
 }
 

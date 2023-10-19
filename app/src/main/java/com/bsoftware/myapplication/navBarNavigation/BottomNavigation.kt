@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,7 +51,8 @@ class BottomNavigation : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    
+                    val navigationController = rememberNavController()
+                    BottomNavigationShow(navController = navigationController)
                 }
             }
         }
@@ -93,7 +95,9 @@ fun BottomNavigationBar(navController : NavController){
         }
     }
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color.Transparent,
+    ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 alwaysShowLabel = true,

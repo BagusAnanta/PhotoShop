@@ -39,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bsoftware.myapplication.navBarNavigation.BottomNavigationShow
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class PhotoGraphicProductList : ComponentActivity() {
@@ -77,6 +78,7 @@ fun PhotoProduct() {
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
         )
+
 
         Column(modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, top = 20.dp)
@@ -133,9 +135,9 @@ fun PhotoProduct() {
                             .size(160.dp, 240.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
-                               // click into checkout
-                                intent.putExtra("typeProduct",productTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                // click into checkout
+                                intent.putExtra("typeProduct", productTitle)
+                                intent.putExtra("photoProduct", R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -150,8 +152,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                intent.putExtra("typeProduct",productTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                intent.putExtra("typeProduct", productTitle)
+                                intent.putExtra("photoProduct", R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -173,8 +175,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                intent.putExtra("typeProduct",productTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                intent.putExtra("typeProduct", productTitle)
+                                intent.putExtra("photoProduct", R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -189,8 +191,8 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                intent.putExtra("typeProduct",productTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                intent.putExtra("typeProduct", productTitle)
+                                intent.putExtra("photoProduct", R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),

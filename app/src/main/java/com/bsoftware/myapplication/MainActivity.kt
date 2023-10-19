@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
+import com.bsoftware.myapplication.navBarNavigation.BottomNavigation
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
