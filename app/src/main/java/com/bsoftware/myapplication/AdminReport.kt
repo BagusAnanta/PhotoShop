@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,6 +33,7 @@ import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class AdminReport : ComponentActivity() {
@@ -45,8 +47,10 @@ class AdminReport : ComponentActivity() {
                         .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val firebase = FireBase()
-                    AdminReportList(firebase.initDatabase())
+                    val firebase = FirebaseDatabase.getInstance()
+                    val reference = firebase.getReference("checkOut")
+
+                    AdminReportList(reference)
                 }
             }
         }
@@ -55,20 +59,31 @@ class AdminReport : ComponentActivity() {
 
 @Composable
 fun AdminReportList(databasepref : DatabaseReference) {
-    var projectList by remember { mutableStateOf(emptyList<CheckOutDataClass>()) }
+    var projectList = remember { mutableStateListOf<CheckOutDataClass>() }
 
     LaunchedEffect(databasepref){
         val postListener = object  : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val project = mutableListOf<CheckOutDataClass>()
-                for(projectSnapshot in snapshot.children){
-                    val projectGet = projectSnapshot.getValue(CheckOutDataClass::class.java)
-                    projectGet?.let{
-                        project.add(it)
-                    }
-                    Log.d("Data get firebase", projectGet.toString())
-                }
-                projectList = project
+
+               if(snapshot.exists()){
+                   projectList.clear()
+
+                   for(projectSnapshot in snapshot.children){
+                       val dataMap = projectSnapshot.value as? Map<*,*>?
+
+                       if(dataMap != null){
+                           val checkOutDataClass = CheckOutDataClass(
+                               id = dataMap["id"] as? String ?: "",
+                               name = dataMap["name"] as? String ?: "",
+                               date = dataMap["date"] as? String ?: "",
+                               numberPhone = dataMap["numberPhone"] as? String ?: "",
+                               projectType = dataMap["projectType"] as? String ?: ""
+                           )
+                           projectList.add(checkOutDataClass)
+                       }
+                   }
+               }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -120,7 +135,7 @@ fun CardShowAdminProjectList(checkoutProduct : CheckOutDataClass){
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 fun AdminReportPreview() {
     MyApplicationTheme {
