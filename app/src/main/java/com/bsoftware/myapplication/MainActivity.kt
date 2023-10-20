@@ -51,7 +51,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
-import com.bsoftware.myapplication.navBarNavigation.BottomNavigation
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
@@ -76,7 +75,9 @@ class MainActivity : ComponentActivity() {
                     firebaseAuth.initFirebaseAuth()
                     if(sharepreference.getLoginState()){
                         // if a true we continue in main menu
-                        context.startActivity(Intent(context,MainMenuActivity::class.java))
+                       /* context.startActivity(Intent(context,MainMenuActivity::class.java))
+                        activity.finish()*/
+                        context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                         activity.finish()
                     } else {
                         LoginUserLogic()
@@ -206,7 +207,9 @@ fun LoginUserLogic(){
                          onSuccess = {
                              // we gonna intent into mainmenu activity
                              sharepreference.setLoginState(true)
-                             context.startActivity(Intent(activity,MainMenuActivity::class.java))
+                             /*context.startActivity(Intent(activity,MainMenuActivity::class.java))
+                             activity.finish()*/
+                             context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                              activity.finish()
                          },
                          onFail = {

@@ -41,7 +41,7 @@ import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class AccountActivity : ComponentActivity() {
-    val firebaseAuth = FirebaseAuthentication()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -51,16 +51,7 @@ class AccountActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var activity = (LocalContext as Activity)
-                    val sharePref = SharePreference(activity)
-                    firebaseAuth.initFirebaseAuth()
-
-                    AccountUserData(
-                        nama = sharePref.getName()!!,
-                        email = firebaseAuth.getEmail(),
-                        phoneNum = sharePref.getPhoneNum()!!,
-                        firebaseAuth
-                    )
+                    AccountUserData()
                 }
             }
         }
@@ -68,12 +59,12 @@ class AccountActivity : ComponentActivity() {
 }
 
 @Composable
-fun AccountUserData(
-    nama : String = "",
-    email : String = "",
-    phoneNum : String = "",
-    firebaseAuth : FirebaseAuthentication = FirebaseAuthentication()
-){
+fun AccountUserData(){
+
+    val firebaseAuth = FirebaseAuthentication()
+    val activity = (LocalContext.current as Activity)
+    val sharePref = SharePreference(activity)
+    firebaseAuth.initFirebaseAuth()
 
     val context = LocalContext.current
 
@@ -131,33 +122,23 @@ fun AccountUserData(
                            )
 
                            Text(
-                               text = stringResource(id = R.string.nama_account,nama),
+                               text = stringResource(id = R.string.nama_account,sharePref.getName()!!),
                                modifier = Modifier.padding(top = 5.dp),
                                fontWeight = FontWeight.Bold
                            )
 
                            Text(
-                               text = stringResource(id = R.string.email_account,email),
+                               text = stringResource(id = R.string.email_account,firebaseAuth.getEmail()),
                                modifier = Modifier.padding(top = 5.dp),
                                fontWeight = FontWeight.Bold
                            )
 
                            Text(
-                               text = stringResource(id = R.string.phonenum_account,phoneNum),
+                               text = stringResource(id = R.string.phonenum_account,sharePref.getPhoneNum()!!),
                                modifier = Modifier.padding(top = 5.dp),
                                fontWeight = FontWeight.Bold
                            )
                        }
-
-                       Image(
-                           painter = painterResource(id = R.drawable.ic_launcher_background),
-                           contentDescription = "profile image",
-                           contentScale = ContentScale.Crop,
-                           modifier = Modifier
-                               .size(110.dp)
-                               .clip(CircleShape),
-                           alignment = Alignment.CenterEnd
-                       )
                    }
                 }
             }
@@ -168,8 +149,13 @@ fun AccountUserData(
                // button in here
                OutlinedButton(
                    onClick = {
-                       // click in here for sign out
+                       // click in here for sign out and delete data in share preference
                        firebaseAuth.signOutEmail()
+                       sharePref.deleteAll()
+                       // and intent into OptionLogin
+                       context.startActivity(Intent(context,OptionLogin::class.java))
+                       activity.finish()
+
                    },
                    modifier = Modifier
                        .padding(top = 20.dp, start = 30.dp, end = 30.dp)
@@ -204,19 +190,15 @@ fun AccountUserData(
                        )
                    )
                }
-
            }
         }
-
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview4() {
     MyApplicationTheme {
-        AccountUserData("Bagus","bagus@gmail.com","0819456748")
+        AccountUserData()
     }
 }

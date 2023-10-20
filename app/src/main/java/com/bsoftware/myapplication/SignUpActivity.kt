@@ -149,6 +149,10 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                     .padding(start = 20.dp, end = 20.dp, top = 20.dp)
             )
             Spacer(modifier = Modifier.padding(top = 10.dp))
+
+            // In here, we must a give some warning for user if a password at least 6 character
+            // because if a password least 6 character a firebase return a weekpassword exception
+            // for a solution you can some give a condition or more
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -182,7 +186,9 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                              sharepreference.setLoginState(true)
 
                              // intent in here into mainmenu
-                             context.startActivity(Intent(context,MainMenuActivity::class.java))
+                            /* context.startActivity(Intent(context,MainMenuActivity::class.java))
+                             activity.finish()*/
+                             context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                              activity.finish()
                          },
                          onFailed = {

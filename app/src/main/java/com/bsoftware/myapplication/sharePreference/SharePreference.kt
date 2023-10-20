@@ -25,6 +25,11 @@ class SharePreference(var activity : Activity) {
         shareEdit.commit()
     }
 
+    fun deleteLoginStateData(){
+        shareEdit.remove(loginKey)
+        shareEdit.commit()
+    }
+
     fun setLoginAdminState(isLogin : Boolean){
         shareEdit.putBoolean(adminLoginKey,isLogin)
         shareEdit.commit()
@@ -45,6 +50,11 @@ class SharePreference(var activity : Activity) {
         return sharePreference.getString(nameKey,"username")
     }
 
+    fun deleteName(){
+        shareEdit.remove(nameKey)
+        shareEdit.commit()
+    }
+
     fun setPhoneNum(phoneNum : String){
         shareEdit.putString(phoneKey,phoneNum)
         shareEdit.commit()
@@ -53,6 +63,19 @@ class SharePreference(var activity : Activity) {
     fun getPhoneNum() : String?{
         return sharePreference.getString(phoneKey,"phonenum")
     }
+
+    fun deletePhoneNum(){
+        shareEdit.remove(phoneKey)
+        shareEdit.commit()
+    }
+
+    fun deleteAll(){
+        deleteLoginStateData()
+        deleteName()
+        deletePhoneNum()
+    }
+
+
     companion object{
         private val loginKey : String = "onLoginState"
         private val nameKey : String = "nameFully"
