@@ -54,6 +54,10 @@ class FireBase {
                val data = snapshot.getValue(UserDataClass::class.java)
 
                // you must for loop because a data much, but i continue tomorrow
+               for(datauser in snapshot.children){
+                   // loop in here and get data in here
+
+               }
            }
 
            override fun onCancelled(error: DatabaseError) {
