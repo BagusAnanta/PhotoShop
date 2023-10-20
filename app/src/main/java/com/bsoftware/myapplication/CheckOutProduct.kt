@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dateFormat.DateFormat
 import com.bsoftware.myapplication.firebaseCloud.FireBase
+import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.generateID.GenerateIDProduct
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
@@ -71,6 +72,8 @@ fun CheckOutConfirmProduct() {
     val sharepref = SharePreference(activity)
     val generateID = GenerateIDProduct()
     val dateNow = DateFormat()
+    val firebaseAuth = FirebaseAuthentication()
+    firebaseAuth.initFirebaseAuth()
 
     val kodePesanan : Any = generateID.generateIDNumber(10)
     val tanggalPesanan : Any = dateNow.getDate()
@@ -202,7 +205,8 @@ fun CheckOutConfirmProduct() {
                           namaPemesan.toString(),
                           nomorHandphone.toString(),
                           tanggalPesanan.toString(),
-                          sharepref.getProductName()
+                          sharepref.getProductName(),
+                          firebaseAuth.getEmail()
                       )
 
                       // intent into ConfirmResult

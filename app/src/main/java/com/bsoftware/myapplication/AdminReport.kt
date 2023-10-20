@@ -90,7 +90,8 @@ fun AdminReportList(databasepref : DatabaseReference) {
                                name = dataMap["name"] as? String ?: "",
                                date = dataMap["date"] as? String ?: "",
                                numberPhone = dataMap["numberPhone"] as? String ?: "",
-                               projectType = dataMap["projectType"] as? String ?: ""
+                               projectType = dataMap["projectType"] as? String ?: "",
+                               email = dataMap["email"] as? String ?: ""
                            )
                            projectList.add(checkOutDataClass)
                        }

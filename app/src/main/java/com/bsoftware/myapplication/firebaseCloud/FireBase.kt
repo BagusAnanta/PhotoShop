@@ -15,14 +15,25 @@ import com.google.firebase.storage.StorageReference
 class FireBase {
 
    private lateinit var databasepreference : DatabaseReference
+   private var email : String = ""
+       set(value) {field = value}
+       get() = field
+
+   private var name : String = ""
+       set(value) {field = value}
+       get() = field
+
+   private var numPhone : String = ""
+       set(value) {field = value}
+       get() = field
 
    fun initDatabase() : DatabaseReference{
        databasepreference = Firebase.database("https://candoapp-ef10f-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
        return databasepreference
    }
 
-    fun writeDataCheckOut(idProject : String,name : String,numberPhone : String,date : String,projectType : String){
-        val userCheckOut = CheckOutDataClass(idProject,name,numberPhone,date,projectType)
+    fun writeDataCheckOut(idProject : String,name : String,numberPhone : String,date : String,projectType : String,email : String){
+        val userCheckOut = CheckOutDataClass(idProject,name,numberPhone,date,projectType,email)
         databasepreference.child("checkOut").child(idProject).setValue(userCheckOut)
             .addOnSuccessListener {
                 Log.d("OnDataSaver","Data Complete Insert")
@@ -31,5 +42,6 @@ class FireBase {
                 Log.e("OnDataSaver","Data Failed Insert")
             }
     }
+
 
 }

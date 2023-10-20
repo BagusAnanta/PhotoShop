@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
+import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
@@ -99,6 +100,8 @@ fun LoginUserLogic(){
 
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
+
+    val firebaseDatabase = FireBase()
 
     val sharepreference = SharePreference(activity)
 
@@ -211,6 +214,21 @@ fun LoginUserLogic(){
                                 sharepreference.setLoginState(true)
                                 /*context.startActivity(Intent(activity,MainMenuActivity::class.java))
                                 activity.finish()*/
+
+                                /*
+                                    * in here, we gonna get name,numphone from email, example if a email match with a user input and
+                                    * if can if password same to we get data name and numphone from firebase realtime database
+                                    * and now we must need a know how get a name and numphone data only from firebase database
+                                */
+
+                                // if email user from firebase database equals firebaseAuth in firebase database
+                                if(email.equals(firebaseAuth.getEmail())){
+                                    // get a name and number phone from firebase realtime database
+
+                                } else {
+                                    // if email not equals
+                                }
+
                                 context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                                 activity.finish()
                             },
