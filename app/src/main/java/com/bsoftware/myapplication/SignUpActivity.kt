@@ -20,9 +20,14 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -33,6 +38,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -89,6 +95,13 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
     val activity = (LocalContext.current as Activity)
 
     val sharepreference = SharePreference(activity)
+
+    var isError by rememberSaveable { mutableStateOf(false) }
+    val charRecommend = 6
+
+    fun validate(pass : String){
+        isError = pass.length < charRecommend
+    }
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -164,7 +177,23 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 20.dp, end = 20.dp, top = 10.dp)
+                    .padding(start = 20.dp, end = 20.dp, top = 10.dp),
+                isError = isError,
+                supportingText = {
+                    if(isError){
+                        Text(
+                            text = "You Password Less 6",
+                            color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                },
+                trailingIcon = {
+                    if(isError){
+                        Icon(Icons.Outlined.Warning,"Warning", tint = Color.Black)
+                    }
+                },
+                keyboardActions = KeyboardActions { validate(password) }
             )
             Spacer(modifier = Modifier.padding(top = 10.dp))
             OutlinedButton(
@@ -173,28 +202,35 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                     // in here we gonna change to firebase authentication
 
                     // dataviewmodel.insertDataLogin(username,password)
-                     val firebaseauthdata = FirebaseAuthentication()
-                     firebaseauthdata.initFirebaseAuth()
-                     firebaseauthdata.createDataUserEmailPass(
-                         email = email,
-                         password = password,
-                         activity = activity,
-                         onSuccess = {
-                             // in here we gonna intent or give toast
-                             sharepreference.setName(name)
-                             sharepreference.setPhoneNum(numberTelp)
-                             sharepreference.setLoginState(true)
 
-                             // intent in here into mainmenu
-                            /* context.startActivity(Intent(context,MainMenuActivity::class.java))
-                             activity.finish()*/
-                             context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                             activity.finish()
-                         },
-                         onFailed = {
-                             Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
-                         }
-                     )
+                     if(name.isNotEmpty() || numberTelp.isNotEmpty() || email.isNotEmpty() || password.isNotEmpty()){
+                         // if a field name,numberTelp,email,and password is not empty or null
+                         val firebaseauthdata = FirebaseAuthentication()
+                         firebaseauthdata.initFirebaseAuth()
+                         firebaseauthdata.createDataUserEmailPass(
+                             email = email,
+                             password = password,
+                             activity = activity,
+                             onSuccess = {
+                                 // in here we gonna intent or give toast
+                                 sharepreference.setName(name)
+                                 sharepreference.setPhoneNum(numberTelp)
+                                 sharepreference.setLoginState(true)
+
+                                 // intent in here into mainmenu
+                                 /* context.startActivity(Intent(context,MainMenuActivity::class.java))
+                                  activity.finish()*/
+                                 context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
+                                 activity.finish()
+                             },
+                             onFailed = {
+                                 Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
+                             }
+                         )
+                     } else {
+                         Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
+                     }
+
                 },
                 modifier = Modifier
                     .fillMaxWidth()

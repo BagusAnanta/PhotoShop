@@ -198,24 +198,30 @@ fun LoginUserLogic(){
                      })
                      dataViewModel.getDataLogin()*/
 
-                     val firebaseAuth = FirebaseAuthentication()
-                     firebaseAuth.initFirebaseAuth()
-                     firebaseAuth.signInDataUserEmailPass(
-                         email = email,
-                         password = password,
-                         activity = activity,
-                         onSuccess = {
-                             // we gonna intent into mainmenu activity
-                             sharepreference.setLoginState(true)
-                             /*context.startActivity(Intent(activity,MainMenuActivity::class.java))
-                             activity.finish()*/
-                             context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                             activity.finish()
-                         },
-                         onFail = {
-                             Toast.makeText(activity,"SignIn Failed, please try again",Toast.LENGTH_SHORT).show()
-                         }
-                     )
+                    if(email.isNotEmpty() || password.isNotEmpty()){
+                        // if a email and password is not null or empty
+                        val firebaseAuth = FirebaseAuthentication()
+                        firebaseAuth.initFirebaseAuth()
+                        firebaseAuth.signInDataUserEmailPass(
+                            email = email,
+                            password = password,
+                            activity = activity,
+                            onSuccess = {
+                                // we gonna intent into mainmenu activity
+                                sharepreference.setLoginState(true)
+                                /*context.startActivity(Intent(activity,MainMenuActivity::class.java))
+                                activity.finish()*/
+                                context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
+                                activity.finish()
+                            },
+                            onFail = {
+                                Toast.makeText(activity,"SignIn Failed, please try again",Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    } else {
+                        Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
+                    }
+
                 },
                 modifier = Modifier
                     .fillMaxWidth()

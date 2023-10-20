@@ -159,24 +159,29 @@ fun LoginAdminLogic(){
 
             OutlinedButton(
                 onClick = {
+                    if(email.isNotEmpty() || password.isNotEmpty()){
+                        val firebaseAuth = FirebaseAuthentication()
+                        firebaseAuth.initFirebaseAuth()
+                        firebaseAuth.signInDataUserEmailPass(
+                            email = email,
+                            password = password,
+                            activity = activity,
+                            onSuccess = {
+                                // we gonna intent into Admin History and delete a User Login State in here
+                                sharepreference.deleteLoginState()
+                                sharepreference.setLoginAdminState(true)
 
-                    val firebaseAuth = FirebaseAuthentication()
-                    firebaseAuth.initFirebaseAuth()
-                    firebaseAuth.signInDataUserEmailPass(
-                        email = email,
-                        password = password,
-                        activity = activity,
-                        onSuccess = {
-                            // we gonna intent into Admin History and delete a User Login State in here
-                            sharepreference.deleteLoginState()
-                            sharepreference.setLoginAdminState(true)
-                            context.startActivity(Intent(context,AdminReport::class.java))
-                            activity.finish()
-                        },
-                        onFail = {
-                            Toast.makeText(activity,"SignIn Failed, please try again", Toast.LENGTH_SHORT).show()
-                        }
-                    )
+                                context.startActivity(Intent(context,AdminReport::class.java))
+                                activity.finish()
+                            },
+                            onFail = {
+                                Toast.makeText(activity,"SignIn Failed, please try again", Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    } else {
+                        Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
+                    }
+
                 },
                 modifier = Modifier
                     .fillMaxWidth()
