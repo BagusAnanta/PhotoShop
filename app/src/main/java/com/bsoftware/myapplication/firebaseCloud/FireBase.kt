@@ -1,7 +1,11 @@
 package com.bsoftware.myapplication.firebaseCloud
 
 import android.util.Log
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import com.bsoftware.myapplication.dataClass.CheckOutDataClass
+import com.bsoftware.myapplication.dataClass.UserDataClass
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -41,6 +45,21 @@ class FireBase {
             .addOnFailureListener {
                 Log.e("OnDataSaver","Data Failed Insert")
             }
+    }
+
+    fun getDataNameEmailNum(){
+        initDatabase()
+       databasepreference.addListenerForSingleValueEvent(object  : ValueEventListener{
+           override fun onDataChange(snapshot: DataSnapshot) {
+               val data = snapshot.getValue(UserDataClass::class.java)
+
+               // you must for loop because a data much, but i continue tomorrow
+           }
+
+           override fun onCancelled(error: DatabaseError) {
+
+           }
+       })
     }
 
 
