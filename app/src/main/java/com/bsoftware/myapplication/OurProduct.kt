@@ -1,5 +1,6 @@
 package com.bsoftware.myapplication
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -36,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class OurProduct : ComponentActivity() {
@@ -60,6 +62,12 @@ class OurProduct : ComponentActivity() {
 @Composable
 fun OurProductShow() {
     val context = LocalContext.current
+    val activity = (LocalContext.current as Activity)
+    val sharePref = SharePreference(activity)
+
+    // in here we gonna delete a data choose in here
+    sharePref.deleteProductChooseAll()
+
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -116,14 +124,9 @@ fun OurProductShow() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 context.startActivity(
-                                    /*Intent(
-                                        context,
-                                        PhotoGraphicProductList::class.java
-                                    )*/
-
                                     Intent(
                                         context,
-                                        AdminReport::class.java
+                                        PhotoGraphicProductList::class.java
                                     )
                                 )
                             }

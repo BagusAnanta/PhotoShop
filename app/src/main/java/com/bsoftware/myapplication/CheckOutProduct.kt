@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
@@ -76,8 +77,6 @@ fun CheckOutConfirmProduct() {
     val namaPemesan : Any? = sharepref.getName()
     val nomorHandphone : Any? = sharepref.getPhoneNum()
 
-    var typeText : String = "Default"
-
     Box(modifier = Modifier.fillMaxSize()){
         Image(
             painter = painterResource(id = R.drawable.backgroundutama),
@@ -88,7 +87,8 @@ fun CheckOutConfirmProduct() {
 
         Column(modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, top = 20.dp)
-            .fillMaxWidth()) {
+            .fillMaxWidth()
+            .fillMaxSize()) {
             Row{
                 Column{
                     Text(
@@ -102,9 +102,8 @@ fun CheckOutConfirmProduct() {
                         color = Color.White
                     )
                 }
-                Intent().extras?.getInt("photoProduct")?.let { painterResource(it) }?.let {
                     Image(
-                        painter = it,
+                        painter = painterResource(id = R.drawable.logoutama),
                         contentDescription = "LogoImage",
                         modifier = Modifier
                             .fillMaxWidth()
@@ -112,7 +111,7 @@ fun CheckOutConfirmProduct() {
                             .size(80.dp, 80.dp)
                     )
                 }
-            }
+
 
             Text(
                 text = "Project Review",
@@ -130,26 +129,11 @@ fun CheckOutConfirmProduct() {
                 Row(
                     modifier = Modifier
                         .padding(10.dp)
-                        .fillMaxWidth()
+                        .fillMaxSize()
                 ) {
                     Column() {
-                        /*
-                        * you can place intent in here and then you place "when" in here for choose a product type
-                        * */
-
-                        // in here, we gonna get intent extra from intent before and then in hewe we use when for give some option
-                        val intent = Intent().extras?.getString("typeProduct")
-                        typeText = when(intent){
-                            "Photographic" -> "Photographic"
-                            "Design Graphic" -> "Design Graphic"
-                            "Video Graphic" -> "Video Graphic"
-
-                            // in else branch we use default value for safety
-                            else -> {"Option Product"}
-                        }
-
                         Text(
-                            typeText,
+                            sharepref.getProductName(),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -161,14 +145,11 @@ fun CheckOutConfirmProduct() {
                     }
 
                     Image(
-                        painter = painterResource(id = R.drawable.foodphotography),
+                        painter = painterResource(sharepref.getImageProduct()),
                         contentDescription = "photoproduct",
                         modifier = Modifier
                             .size(100.dp, 240.dp)
                             .clip(RoundedCornerShape(16.dp))
-                            .clickable {
-                                // click into checkout
-                            }
                             .fillMaxWidth(0.5f),
                         contentScale = ContentScale.FillBounds,
                     )
@@ -198,35 +179,35 @@ fun CheckOutConfirmProduct() {
                     modifier = Modifier.padding(top = 10.dp),
                     color = Color.White
                 )
-                Text(
-                    text = stringResource(id = R.string.nama_pemesan,namaPemesan!!),
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp),
-                    color = Color.White
-                )
-                Text(
-                    text = stringResource(id = R.string.nomor_handphone,nomorHandphone!!),
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 10.dp),
-                    color = Color.White
-                )
+                 Text(
+                     text = stringResource(id = R.string.nama_pemesan,namaPemesan!!),
+                     fontWeight = FontWeight.Bold,
+                     modifier = Modifier.padding(top = 10.dp),
+                     color = Color.White
+                 )
+                 Text(
+                     text = stringResource(id = R.string.nomor_handphone,nomorHandphone!!),
+                     fontWeight = FontWeight.Bold,
+                     modifier = Modifier.padding(top = 10.dp),
+                     color = Color.White
+                 )
             }
             OutlinedButton(
                 onClick = {
                     // we save a data in here and exit into next page
-                    val firebase = FireBase()
-                    firebase.initDatabase()
-                    firebase.writeDataCheckOut(
-                        kodePesanan.toString(),
-                        namaPemesan.toString(),
-                        nomorHandphone.toString(),
-                        tanggalPesanan.toString(),
-                        typeText
-                    )
+                      val firebase = FireBase()
+                      firebase.initDatabase()
+                      firebase.writeDataCheckOut(
+                          kodePesanan.toString(),
+                          namaPemesan.toString(),
+                          nomorHandphone.toString(),
+                          tanggalPesanan.toString(),
+                          sharepref.getProductName()
+                      )
 
-                    // intent into ConfirmResult
-                    context.startActivity(Intent(context,ConfirmResult::class.java))
-                    activity.finish()
+                      // intent into ConfirmResult
+                      context.startActivity(Intent(context,ConfirmResult::class.java))
+                      activity.finish()
                 },
 
                 modifier = Modifier
@@ -236,14 +217,16 @@ fun CheckOutConfirmProduct() {
             ) {
                 Text(
                     "Confirm Order",
-                     color = Color.White,
-                     fontWeight = FontWeight.Bold
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
                 )
             }
+            }
+
+
         }
 
     }
-}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

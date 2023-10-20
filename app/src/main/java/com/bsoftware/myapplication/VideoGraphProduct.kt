@@ -1,5 +1,6 @@
 package com.bsoftware.myapplication
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -40,6 +41,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class VideoGraphProduct : ComponentActivity() {
@@ -65,9 +67,13 @@ class VideoGraphProduct : ComponentActivity() {
 @Composable
 fun VideoGraphicProduct() {
     var search by remember { mutableStateOf("") }
-    val videoGraphTitle = "Video Graphic"
 
     val context = LocalContext.current
+    val activity = (LocalContext.current as Activity)
+
+    val sharePref = SharePreference(activity)
+
+    sharePref.setProductName("Video Graphic")
     val intent = Intent(context,CheckOutProduct::class.java)
 
 
@@ -135,8 +141,7 @@ fun VideoGraphicProduct() {
                             .clickable {
                                 // click into checkout
                                 // in here we gonna change a id if have
-                                intent.putExtra("typeProduct",videoGraphTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -151,8 +156,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                intent.putExtra("typeProduct",videoGraphTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -174,8 +178,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                intent.putExtra("typeProduct",videoGraphTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -190,8 +193,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                intent.putExtra("typeProduct",videoGraphTitle)
-                                intent.putExtra("photoProduct",R.drawable.foodphotography)
+                                sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -207,8 +209,7 @@ fun VideoGraphicProduct() {
                         .clip(RoundedCornerShape(16.dp))
                         .clickable {
                             // click into checkout
-                            intent.putExtra("typeProduct",videoGraphTitle)
-                            intent.putExtra("photoProduct",R.drawable.foodphotography)
+                            sharePref.setImageProduct(R.drawable.foodphotography)
                             context.startActivity(intent)
                         }
                         .fillMaxWidth(0.5f),

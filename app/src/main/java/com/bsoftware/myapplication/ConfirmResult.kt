@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class ConfirmResult : ComponentActivity() {
@@ -62,6 +63,7 @@ class ConfirmResult : ComponentActivity() {
 fun ConfirmProject() {
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
+    val sharePref = SharePreference(activity)
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -124,7 +126,10 @@ fun ConfirmProject() {
             OutlinedButton(
                 onClick = {
                     // intent into Main menu activity
-                    context.startActivity(Intent(context,MainMenuActivity::class.java))
+                    sharePref.deleteProductChooseAll()
+                    /*context.startActivity(Intent(context,MainMenuActivity::class.java))
+                    activity.finish()*/
+                    context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                     activity.finish()
                 },
                 modifier = Modifier
