@@ -232,7 +232,7 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                              }
                          )
                          // on here we gonna a write too a userData in firebase database
-                         firebase.writeDataUser(userId = userIdGenerate,email = firebaseauthdata.getEmail(),name = name, phonNum = numberTelp)
+                         firebase.writeDataUser(userId = userIdGenerate,email = firebaseauthdata.getEmail(),name = name, numberPhone = numberTelp)
                      } else {
                          Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
                      }
