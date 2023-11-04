@@ -47,24 +47,15 @@ class FireBase {
             }
     }
 
-    fun getDataNameEmailNum(){
-        initDatabase()
-       databasepreference.addListenerForSingleValueEvent(object  : ValueEventListener{
-           override fun onDataChange(snapshot: DataSnapshot) {
-               val data = snapshot.getValue(UserDataClass::class.java)
-
-               // you must for loop because a data much, but i continue tomorrow
-               for(datauser in snapshot.children){
-                   // loop in here and get data in here
-
-               }
-           }
-
-           override fun onCancelled(error: DatabaseError) {
-
-           }
-       })
+    fun writeDataUser(userId : String,email: String,name: String,numberPhone: String){
+        val dataUser = UserDataClass(userId,email,name,numberPhone)
+        databasepreference.child("userData").child(userId).setValue(dataUser)
+            .addOnSuccessListener {
+                Log.d("OnDataSaver","Data Complete Insert")
+            }
+            .addOnFailureListener {
+                Log.e("OnDataSaver","Data Failed Insert")
+            }
     }
-
 
 }

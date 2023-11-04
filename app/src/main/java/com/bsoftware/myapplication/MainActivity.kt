@@ -28,7 +28,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -49,11 +51,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
+import com.bsoftware.myapplication.dataClass.UserDataClass
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 
 class MainActivity : ComponentActivity() {
     private val dataviewmodel : LoginDataViewModelClass by viewModels()
@@ -222,12 +229,8 @@ fun LoginUserLogic(){
                                 */
 
                                 // if email user from firebase database equals firebaseAuth in firebase database
-                                if(email.equals(firebaseAuth.getEmail())){
-                                    // get a name and number phone from firebase realtime database
+                                // in here we gonna show user data
 
-                                } else {
-                                    // if email not equals
-                                }
 
                                 context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                                 activity.finish()
@@ -288,6 +291,43 @@ fun LoginUserLogic(){
         }
     }
 }
+
+@Composable
+fun getDataUser(databasePref : DatabaseReference){
+    val dataList = remember { mutableStateListOf<UserDataClass>() }
+
+    LaunchedEffect(databasePref){
+        val postListener = object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    dataList.clear()
+
+                    for(projectSnapshot in snapshot.children){
+                        val dataMap = projectSnapshot.value as? Map<*,*>
+
+                        if(dataMap != null){
+                            val userData = UserDataClass(
+                                idUser = dataMap["idUser"] as? String ?: "",
+                                email = dataMap["email"] as? String ?: "",
+                                name = dataMap["name"] as? String ?: "",
+                                numberPhone = dataMap["numberPhone"] as? String ?: ""
+                            )
+
+                            dataList.add(userData)
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+            }
+
+            databasePref.addValueEventListener(postListener)
+        }
+    }
+
 
 
 

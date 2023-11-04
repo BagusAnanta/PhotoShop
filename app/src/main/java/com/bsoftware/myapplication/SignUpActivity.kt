@@ -55,7 +55,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
+import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
+import com.bsoftware.myapplication.generateID.UserIDUniq
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 import com.google.firebase.auth.FirebaseAuth
@@ -205,6 +207,8 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
 
                      if(name.isNotEmpty() || numberTelp.isNotEmpty() || email.isNotEmpty() || password.isNotEmpty()){
                          // if a field name,numberTelp,email,and password is not empty or null
+                         val userIdGenerate = UserIDUniq().generateUserIDNumber(5)
+                         val firebase = FireBase()
                          val firebaseauthdata = FirebaseAuthentication()
                          firebaseauthdata.initFirebaseAuth()
                          firebaseauthdata.createDataUserEmailPass(
@@ -227,6 +231,8 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                                  Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
                              }
                          )
+                         // on here we gonna a write too a userData in firebase database
+                         firebase.writeDataUser(userId = userIdGenerate,email = firebaseauthdata.getEmail(),name = name, phonNum = numberTelp)
                      } else {
                          Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
                      }
