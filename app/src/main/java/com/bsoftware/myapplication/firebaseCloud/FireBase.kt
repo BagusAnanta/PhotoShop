@@ -19,17 +19,6 @@ import com.google.firebase.storage.StorageReference
 class FireBase {
 
    private lateinit var databasepreference : DatabaseReference
-   private var email : String = ""
-       set(value) {field = value}
-       get() = field
-
-   private var name : String = ""
-       set(value) {field = value}
-       get() = field
-
-   private var numPhone : String = ""
-       set(value) {field = value}
-       get() = field
 
    fun initDatabase() : DatabaseReference{
        databasepreference = Firebase.database("https://candoapp-ef10f-default-rtdb.asia-southeast1.firebasedatabase.app/").reference
@@ -47,9 +36,9 @@ class FireBase {
             }
     }
 
-    fun writeDataUser(userId : String,email: String,name: String,numberPhone: String){
-        val dataUser = UserDataClass(userId,email,name,numberPhone)
-        databasepreference.child("userData").child(userId).setValue(dataUser)
+    fun writeDataUser(email: String,name: String,numberPhone: String){
+        val dataUser = UserDataClass(email,name,numberPhone)
+        databasepreference.child("userData").child(email).setValue(dataUser)
             .addOnSuccessListener {
                 Log.d("OnDataSaver","Data Complete Insert")
             }

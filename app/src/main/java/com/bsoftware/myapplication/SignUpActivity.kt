@@ -207,7 +207,7 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
 
                      if(name.isNotEmpty() || numberTelp.isNotEmpty() || email.isNotEmpty() || password.isNotEmpty()){
                          // if a field name,numberTelp,email,and password is not empty or null
-                         val userIdGenerate = UserIDUniq().generateUserIDNumber(5)
+                         // val userIdGenerate = UserIDUniq().generateUserIDNumber(5)
                          val firebase = FireBase()
                          val firebaseauthdata = FirebaseAuthentication()
                          firebaseauthdata.initFirebaseAuth()
@@ -221,6 +221,9 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                                  sharepreference.setPhoneNum(numberTelp)
                                  sharepreference.setLoginState(true)
 
+                                 // on here we gonna a write too a userData in firebase database
+                                 firebase.writeDataUser(email = firebaseauthdata.getEmail(),name = name, numberPhone = numberTelp)
+
                                  // intent in here into mainmenu
                                  /* context.startActivity(Intent(context,MainMenuActivity::class.java))
                                   activity.finish()*/
@@ -231,8 +234,7 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                                  Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
                              }
                          )
-                         // on here we gonna a write too a userData in firebase database
-                         firebase.writeDataUser(userId = userIdGenerate,email = firebaseauthdata.getEmail(),name = name, numberPhone = numberTelp)
+
                      } else {
                          Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
                      }

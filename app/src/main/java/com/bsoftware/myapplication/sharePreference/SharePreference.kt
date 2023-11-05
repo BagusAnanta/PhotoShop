@@ -109,10 +109,24 @@ class SharePreference(var activity : Activity) {
         shareEdit.commit()
     }
 
+    fun setEmail(phoneNum : String){
+        shareEdit.putString(phoneKey,phoneNum)
+        shareEdit.commit()
+    }
+
+    fun getEmail() : String?{
+        return sharePreference.getString(phoneKey,"phonenum")
+    }
+
+    fun deleteEmail(){
+        shareEdit.remove(phoneKey)
+        shareEdit.commit()
+    }
     fun deleteAll(){
         deleteLoginStateData()
         deleteName()
         deletePhoneNum()
+        deleteEmail()
     }
 
 
@@ -121,6 +135,7 @@ class SharePreference(var activity : Activity) {
         private val nameKey : String = "nameFully"
         private val phoneKey : String = "numphoneKey"
         private val adminLoginKey : String = "adminKey"
+        private val emailKey : String = "emailKey"
 
         // for product choose
         private val productKey : String = "productChooseKey"

@@ -1,6 +1,5 @@
 package com.bsoftware.myapplication.appAPI
 
-import com.bsoftware.myapplication.dataClass.LoginDataClass
 import com.bsoftware.myapplication.dataClass.PhotoProductDataClass
 import retrofit2.Response
 import retrofit2.http.Field

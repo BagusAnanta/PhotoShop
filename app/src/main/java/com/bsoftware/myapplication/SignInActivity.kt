@@ -50,7 +50,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.LifecycleOwner
 import com.bsoftware.myapplication.dataClass.UserDataClass
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FireBase
@@ -60,6 +59,7 @@ import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class MainActivity : ComponentActivity() {
@@ -108,7 +108,11 @@ fun LoginUserLogic(){
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
 
-    val firebaseDatabase = FireBase()
+
+    val getEmail = "Test@email.com"
+    val firebase = FirebaseDatabase.getInstance()
+    val reference = firebase.getReference("userData").child(getEmail) // in here we get a email data in child
+    val userDataList = getDataUser(databasePref = reference)
 
     val sharepreference = SharePreference(activity)
 
@@ -191,23 +195,6 @@ fun LoginUserLogic(){
 
             OutlinedButton(
                 onClick = {
-                    /* dataViewModel.Datauser.observe(lifeCycleOwner, Observer { datauser ->
-                         for(datauserlogin in datauser){
-                             usernameData = datauserlogin.username
-                             passwordData = datauserlogin.password
-
-                             if(usernameData == username && passwordData == password){
-                                 sharepreference.setLoginState(true)
-                                 context.startActivity(Intent(context,MainMenuActivity::class.java))
-                                 activity.finish()
-                             } else {
-                                 Toast.makeText(context,"Hello fail :(",Toast.LENGTH_SHORT).show()
-                             }
-
-                         }
-                     })
-                     dataViewModel.getDataLogin()*/
-
                     if(email.isNotEmpty() || password.isNotEmpty()){
                         // if a email and password is not null or empty
                         val firebaseAuth = FirebaseAuthentication()
@@ -228,8 +215,7 @@ fun LoginUserLogic(){
                                     * and now we must need a know how get a name and numphone data only from firebase database
                                 */
 
-                                // if email user from firebase database equals firebaseAuth in firebase database
-                                // in here we gonna show user data
+                                // in here we gonna get a data and save in share preference
 
 
                                 context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
@@ -293,7 +279,7 @@ fun LoginUserLogic(){
 }
 
 @Composable
-fun getDataUser(databasePref : DatabaseReference){
+fun getDataUser(databasePref : DatabaseReference) : List<UserDataClass>{
     val dataList = remember { mutableStateListOf<UserDataClass>() }
 
     LaunchedEffect(databasePref){
@@ -307,7 +293,6 @@ fun getDataUser(databasePref : DatabaseReference){
 
                         if(dataMap != null){
                             val userData = UserDataClass(
-                                idUser = dataMap["idUser"] as? String ?: "",
                                 email = dataMap["email"] as? String ?: "",
                                 name = dataMap["name"] as? String ?: "",
                                 numberPhone = dataMap["numberPhone"] as? String ?: ""
@@ -322,11 +307,12 @@ fun getDataUser(databasePref : DatabaseReference){
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-            }
+        }
 
             databasePref.addValueEventListener(postListener)
-        }
     }
+        return dataList
+}
 
 
 
