@@ -109,17 +109,17 @@ class SharePreference(var activity : Activity) {
         shareEdit.commit()
     }
 
-    fun setEmail(phoneNum : String){
-        shareEdit.putString(phoneKey,phoneNum)
+    fun setEmail(email : String){
+        shareEdit.putString(emailKey,email)
         shareEdit.commit()
     }
 
     fun getEmail() : String?{
-        return sharePreference.getString(phoneKey,"phonenum")
+        return sharePreference.getString(emailKey,"email")
     }
 
     fun deleteEmail(){
-        shareEdit.remove(phoneKey)
+        shareEdit.remove(emailKey)
         shareEdit.commit()
     }
     fun deleteAll(){

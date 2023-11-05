@@ -102,17 +102,9 @@ fun LoginUserLogic(){
     var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
 
-    var usernameData : String?
-    var passwordData : String?
-
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
-
-
-    val getEmail = "Test@email.com"
-    val firebase = FirebaseDatabase.getInstance()
-    val reference = firebase.getReference("userData").child(getEmail) // in here we get a email data in child
-    val userDataList = getDataUser(databasePref = reference)
+    val getEmail = FirebaseAuthentication().initFirebaseAuth()
 
     val sharepreference = SharePreference(activity)
 
@@ -206,18 +198,7 @@ fun LoginUserLogic(){
                             onSuccess = {
                                 // we gonna intent into mainmenu activity
                                 sharepreference.setLoginState(true)
-                                /*context.startActivity(Intent(activity,MainMenuActivity::class.java))
-                                activity.finish()*/
-
-                                /*
-                                    * in here, we gonna get name,numphone from email, example if a email match with a user input and
-                                    * if can if password same to we get data name and numphone from firebase realtime database
-                                    * and now we must need a know how get a name and numphone data only from firebase database
-                                */
-
-                                // in here we gonna get a data and save in share preference
-
-
+                                getDataUser(firebaseAuth.getEmail(),activity)
                                 context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                                 activity.finish()
                             },
@@ -278,40 +259,25 @@ fun LoginUserLogic(){
     }
 }
 
-@Composable
-fun getDataUser(databasePref : DatabaseReference) : List<UserDataClass>{
-    val dataList = remember { mutableStateListOf<UserDataClass>() }
 
-    LaunchedEffect(databasePref){
-        val postListener = object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    dataList.clear()
+fun getDataUser(email : String,activity : Activity) {
+    val firebase = FirebaseDatabase.getInstance()
+    val reference = firebase.getReference("userData").child(email) // in here we get a email data in child
+    val sharepreference = SharePreference(activity)
 
-                    for(projectSnapshot in snapshot.children){
-                        val dataMap = projectSnapshot.value as? Map<*,*>
-
-                        if(dataMap != null){
-                            val userData = UserDataClass(
-                                email = dataMap["email"] as? String ?: "",
-                                name = dataMap["name"] as? String ?: "",
-                                numberPhone = dataMap["numberPhone"] as? String ?: ""
-                            )
-
-                            dataList.add(userData)
-                        }
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+    val postListener = object : ValueEventListener{
+        override fun onDataChange(snapshot: DataSnapshot) {
+            val userData = snapshot.getValue(UserDataClass::class.java)
+            sharepreference.setEmail(userData!!.email)
+            sharepreference.setName(userData.name)
+            sharepreference.setPhoneNum(userData.numberPhone)
         }
 
-            databasePref.addValueEventListener(postListener)
+        override fun onCancelled(error: DatabaseError) {
+            TODO("Not yet implemented")
+        }
     }
-        return dataList
+    reference.addValueEventListener(postListener)
 }
 
 

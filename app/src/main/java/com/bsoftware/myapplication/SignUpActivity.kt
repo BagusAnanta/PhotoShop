@@ -23,9 +23,7 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +31,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -57,10 +54,8 @@ import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
-import com.bsoftware.myapplication.generateID.UserIDUniq
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
-import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : ComponentActivity() {
 
@@ -216,17 +211,15 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
                              password = password,
                              activity = activity,
                              onSuccess = {
-                                 // in here we gonna intent or give toast
                                  sharepreference.setName(name)
                                  sharepreference.setPhoneNum(numberTelp)
+                                 sharepreference.setEmail(firebaseauthdata.getEmail())
                                  sharepreference.setLoginState(true)
 
                                  // on here we gonna a write too a userData in firebase database
+                                 firebase.initDatabase()
                                  firebase.writeDataUser(email = firebaseauthdata.getEmail(),name = name, numberPhone = numberTelp)
 
-                                 // intent in here into mainmenu
-                                 /* context.startActivity(Intent(context,MainMenuActivity::class.java))
-                                  activity.finish()*/
                                  context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                                  activity.finish()
                              },

@@ -72,9 +72,6 @@ fun LoginAdminLogic(){
     var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
 
-    var usernameData : String?
-    var passwordData : String?
-
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
 

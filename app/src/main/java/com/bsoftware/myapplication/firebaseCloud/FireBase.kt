@@ -38,7 +38,7 @@ class FireBase {
 
     fun writeDataUser(email: String,name: String,numberPhone: String){
         val dataUser = UserDataClass(email,name,numberPhone)
-        databasepreference.child("userData").child(email).setValue(dataUser)
+        databasepreference.child("userData").child(name).setValue(dataUser)
             .addOnSuccessListener {
                 Log.d("OnDataSaver","Data Complete Insert")
             }
