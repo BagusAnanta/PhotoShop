@@ -199,15 +199,17 @@ fun CheckOutConfirmProduct() {
                 onClick = {
                     // we save a data in here and exit into next page
                       val firebase = FireBase()
-                      firebase.initDatabase()
-                      firebase.writeDataCheckOut(
-                          kodePesanan.toString(),
-                          namaPemesan.toString(),
-                          nomorHandphone.toString(),
-                          tanggalPesanan.toString(),
-                          sharepref.getProductName(),
-                          firebaseAuth.getEmail()
-                      )
+                      firebase.apply {
+                          initDatabase()
+                          writeDataCheckOut(
+                              kodePesanan.toString(),
+                              namaPemesan.toString(),
+                              nomorHandphone.toString(),
+                              tanggalPesanan.toString(),
+                              sharepref.getProductName(),
+                              firebaseAuth.getEmail()
+                          )
+                      }
 
                       // intent into ConfirmResult
                       context.startActivity(Intent(context,ConfirmResult::class.java))

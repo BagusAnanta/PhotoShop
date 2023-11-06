@@ -50,14 +50,10 @@ class OptionLogin : ComponentActivity() {
                     val activity = (LocalContext.current as Activity)
                     val context = LocalContext.current
                     val sharepreference = SharePreference(activity)
-                    if(sharepreference.getLoginState()){
-                        // if a true we continue in main menu
-                       /* context.startActivity(Intent(context,MainMenuActivity::class.java))
-                        activity.finish()*/
+                    if(sharepreference.getLoginState()){ // if user is true
                         context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                         activity.finish()
-                        // if a admin true
-                    } else if(sharepreference.getLoginAdminState()) {
+                    } else if(sharepreference.getLoginAdminState()) { // if admin is true
                         // intent into admin report
                         context.startActivity(Intent(context,AdminReport::class.java))
                     } else {

@@ -62,7 +62,6 @@ class AdminReport : ComponentActivity() {
                 ) {
                     val firebase = FirebaseDatabase.getInstance()
                     val reference = firebase.getReference("checkOut")
-
                     AdminReportList(reference)
                 }
             }
@@ -72,7 +71,7 @@ class AdminReport : ComponentActivity() {
 
 @Composable
 fun AdminReportList(databasepref : DatabaseReference) {
-    var projectList = remember { mutableStateListOf<CheckOutDataClass>() }
+    val projectList = remember { mutableStateListOf<CheckOutDataClass>() }
 
     LaunchedEffect(databasepref){
         val postListener = object  : ValueEventListener {

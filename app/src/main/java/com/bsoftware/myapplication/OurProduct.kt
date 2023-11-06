@@ -68,7 +68,6 @@ fun OurProductShow() {
     // in here we gonna delete a data choose in here
     sharePref.deleteProductChooseAll()
 
-
     Box(modifier = Modifier.fillMaxSize()){
         Image(
             painter = painterResource(id = R.drawable.backgroundutama),

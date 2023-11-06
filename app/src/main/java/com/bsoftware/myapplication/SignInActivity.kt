@@ -51,7 +51,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.dataClass.UserDataClass
-import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.sharePreference.SharePreference
@@ -63,7 +62,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class MainActivity : ComponentActivity() {
-    private val dataviewmodel : LoginDataViewModelClass by viewModels()
     private val firebaseAuth : FirebaseAuthentication = FirebaseAuthentication()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,9 +80,6 @@ class MainActivity : ComponentActivity() {
                     val sharepreference = SharePreference(activity)
                     firebaseAuth.initFirebaseAuth()
                     if(sharepreference.getLoginState()){
-                        // if a true we continue in main menu
-                       /* context.startActivity(Intent(context,MainMenuActivity::class.java))
-                        activity.finish()*/
                         context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                         activity.finish()
                     } else {
@@ -104,7 +99,6 @@ fun LoginUserLogic(){
 
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
-    val getEmail = FirebaseAuthentication().initFirebaseAuth()
 
     val sharepreference = SharePreference(activity)
 
@@ -190,22 +184,23 @@ fun LoginUserLogic(){
                     if(email.isNotEmpty() || password.isNotEmpty()){
                         // if a email and password is not null or empty
                         val firebaseAuth = FirebaseAuthentication()
-                        firebaseAuth.initFirebaseAuth()
-                        firebaseAuth.signInDataUserEmailPass(
-                            email = email,
-                            password = password,
-                            activity = activity,
-                            onSuccess = {
-                                // we gonna intent into mainmenu activity
-                                sharepreference.setLoginState(true)
-                                getDataUser(firebaseAuth.getEmail(),activity)
-                                context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                                activity.finish()
-                            },
-                            onFail = {
-                                Toast.makeText(activity,"SignIn Failed, please try again",Toast.LENGTH_SHORT).show()
-                            }
-                        )
+                        firebaseAuth.apply {
+                            initFirebaseAuth()
+                            signInDataUserEmailPass(
+                                email = email,
+                                password = password,
+                                activity = activity,
+                                onSuccess = {
+                                    // we gonna intent into mainmenu activity
+                                    sharepreference.setLoginState(true)
+                                    context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
+                                    activity.finish()
+                                },
+                                onFail = {
+                                    Toast.makeText(activity,"SignIn Failed, please try again",Toast.LENGTH_SHORT).show()
+                                }
+                            )
+                        }
                     } else {
                         Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
                     }
@@ -268,9 +263,11 @@ fun getDataUser(email : String,activity : Activity) {
     val postListener = object : ValueEventListener{
         override fun onDataChange(snapshot: DataSnapshot) {
             val userData = snapshot.getValue(UserDataClass::class.java)
-            sharepreference.setEmail(userData!!.email)
-            sharepreference.setName(userData.name)
-            sharepreference.setPhoneNum(userData.numberPhone)
+            sharepreference.apply {
+                setEmail(email)
+                setName(userData!!.name)
+                setPhoneNum(userData.numberPhone)
+            }
         }
 
         override fun onCancelled(error: DatabaseError) {

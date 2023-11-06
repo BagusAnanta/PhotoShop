@@ -51,16 +51,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bsoftware.myapplication.dataViewModelClass.LoginDataViewModelClass
 import com.bsoftware.myapplication.firebaseCloud.FireBase
 import com.bsoftware.myapplication.firebaseCloud.FirebaseAuthentication
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
 class SignUpActivity : ComponentActivity() {
-
-    private val dataviewmodel : LoginDataViewModelClass by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +69,7 @@ class SignUpActivity : ComponentActivity() {
                         .verticalScroll(rememberScrollState()),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignUp(dataviewmodel)
+                    SignUp()
                 }
             }
         }
@@ -82,7 +78,7 @@ class SignUpActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) {
+fun SignUp() {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
@@ -195,39 +191,37 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
             Spacer(modifier = Modifier.padding(top = 10.dp))
             OutlinedButton(
                 onClick = {
-                    // insert data in here, after that we intent to main menu
-                    // in here we gonna change to firebase authentication
-
-                    // dataviewmodel.insertDataLogin(username,password)
-
                      if(name.isNotEmpty() || numberTelp.isNotEmpty() || email.isNotEmpty() || password.isNotEmpty()){
-                         // if a field name,numberTelp,email,and password is not empty or null
-                         // val userIdGenerate = UserIDUniq().generateUserIDNumber(5)
                          val firebase = FireBase()
                          val firebaseauthdata = FirebaseAuthentication()
-                         firebaseauthdata.initFirebaseAuth()
-                         firebaseauthdata.createDataUserEmailPass(
-                             email = email,
-                             password = password,
-                             activity = activity,
-                             onSuccess = {
-                                 sharepreference.setName(name)
-                                 sharepreference.setPhoneNum(numberTelp)
-                                 sharepreference.setEmail(firebaseauthdata.getEmail())
-                                 sharepreference.setLoginState(true)
+                         firebaseauthdata.apply {
+                             initFirebaseAuth()
+                             createDataUserEmailPass(
+                                 email = email,
+                                 password = password,
+                                 activity = activity,
+                                 onSuccess = {
+                                     sharepreference.apply {
+                                         setLoginState(true)
+                                         setName(name)
+                                         setEmail(email)
+                                         setPhoneNum(numberTelp)
+                                     }
 
-                                 // on here we gonna a write too a userData in firebase database
-                                 firebase.initDatabase()
-                                 firebase.writeDataUser(email = firebaseauthdata.getEmail(),name = name, numberPhone = numberTelp)
+                                     // on here we gonna a write too a userData in firebase database
+                                     firebase.apply {
+                                         initDatabase()
+                                         writeDataUser(email = firebaseauthdata.getEmail(),name = name, numberPhone = numberTelp)
+                                     }
 
-                                 context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                                 activity.finish()
-                             },
-                             onFailed = {
-                                 Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
-                             }
-                         )
-
+                                     context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
+                                     activity.finish()
+                                 },
+                                 onFailed = {
+                                     Toast.makeText(context,"Failed into SignUp Data, please try again",Toast.LENGTH_SHORT).show()
+                                 }
+                             )
+                         }
                      } else {
                          Toast.makeText(context,"A Field is have empty, please check again",Toast.LENGTH_SHORT).show()
                      }
@@ -281,7 +275,6 @@ fun SignUp(dataviewmodel : LoginDataViewModelClass = LoginDataViewModelClass()) 
         }
     }
 }
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

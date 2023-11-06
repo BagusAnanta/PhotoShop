@@ -128,7 +128,7 @@ fun AccountUserData(){
                            )
 
                            Text(
-                               text = stringResource(id = R.string.email_account,sharePref.getEmail()!!),
+                               text = stringResource(id = R.string.email_account, sharePref.getEmail()!!),
                                modifier = Modifier.padding(top = 5.dp),
                                fontWeight = FontWeight.Bold
                            )
@@ -143,9 +143,7 @@ fun AccountUserData(){
                 }
             }
 
-           Column(
-
-           ) {
+           Column {
                // button in here
                OutlinedButton(
                    onClick = {
