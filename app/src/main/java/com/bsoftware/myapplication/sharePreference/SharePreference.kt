@@ -6,8 +6,8 @@ import android.content.SharedPreferences
 
 class SharePreference(var activity : Activity) {
 
-    private val sharePreference = activity.getSharedPreferences("IsLoginState", Context.MODE_PRIVATE)
-    private val shareEdit = sharePreference.edit()
+    private val sharePreferenceLogin = activity.getSharedPreferences("LoginStatePref",Context.MODE_PRIVATE)
+    private val sharePrefEdit = sharePreferenceLogin.edit()
 
     // for save a choice data
     private val sharePreferenceChoose = activity.getSharedPreferences("UserProductChoose", Context.MODE_PRIVATE)
@@ -51,76 +51,96 @@ class SharePreference(var activity : Activity) {
 
 
     fun setLoginState(isLogin : Boolean){
-        shareEdit.putBoolean(loginKey,isLogin)
-        shareEdit.commit()
+        sharePrefEdit.apply {
+            putBoolean(loginKey,isLogin)
+            commit()
+        }
     }
 
     fun getLoginState() : Boolean{
-        return sharePreference.getBoolean(loginKey,false)
+        return sharePreferenceLogin.getBoolean(loginKey,false)
     }
 
     fun deleteLoginState(){
-        shareEdit.remove(loginKey)
-        shareEdit.putBoolean(loginKey,false)
-        shareEdit.commit()
+       sharePrefEdit.apply {
+           remove(loginKey)
+           putBoolean(loginKey,false)
+           commit()
+       }
     }
 
     fun deleteLoginStateData(){
-        shareEdit.remove(loginKey)
-        shareEdit.commit()
+        sharePrefEdit.apply {
+            remove(loginKey)
+            commit()
+        }
     }
 
     fun setLoginAdminState(isLogin : Boolean){
-        shareEdit.putBoolean(adminLoginKey,isLogin)
-        shareEdit.commit()
+       sharePrefEdit.apply {
+           putBoolean(adminLoginKey,isLogin)
+           commit()
+       }
     }
 
     fun getLoginAdminState() : Boolean{
-        return sharePreference.getBoolean(adminLoginKey,false)
+        return sharePreferenceLogin.getBoolean(adminLoginKey,false)
     }
 
 
     // function for get name and numberphone
     fun setName(name : String){
-        shareEdit.putString(nameKey,name)
-        shareEdit.commit()
+        sharePrefEdit.apply {
+            putString(nameKey,name)
+            commit()
+        }
     }
 
     fun getName() : String?{
-        return sharePreference.getString(nameKey,"username")
+        return sharePreferenceLogin.getString(nameKey,"username")
     }
 
     fun deleteName(){
-        shareEdit.remove(nameKey)
-        shareEdit.commit()
+        sharePrefEdit.apply {
+            remove(nameKey)
+            commit()
+        }
     }
 
     fun setPhoneNum(phoneNum : String){
-        shareEdit.putString(phoneKey,phoneNum)
-        shareEdit.commit()
+       sharePrefEdit.apply {
+           putString(phoneKey,phoneNum)
+           commit()
+       }
     }
 
     fun getPhoneNum() : String?{
-        return sharePreference.getString(phoneKey,"phonenum")
+        return sharePreferenceLogin.getString(phoneKey,"phonenum")
     }
 
     fun deletePhoneNum(){
-        shareEdit.remove(phoneKey)
-        shareEdit.commit()
+       sharePrefEdit.apply {
+           remove(phoneKey)
+           commit()
+       }
     }
 
     fun setEmail(email : String){
-        shareEdit.putString(emailKey,email)
-        shareEdit.commit()
+        sharePrefEdit.apply {
+            putString(emailKey,email)
+            commit()
+        }
     }
 
     fun getEmail() : String?{
-        return sharePreference.getString(emailKey,"email")
+        return sharePreferenceLogin.getString(emailKey,"email")
     }
 
     fun deleteEmail(){
-        shareEdit.remove(emailKey)
-        shareEdit.commit()
+       sharePrefEdit.apply {
+           remove(emailKey)
+           commit()
+       }
     }
     fun deleteAll(){
         deleteLoginStateData()

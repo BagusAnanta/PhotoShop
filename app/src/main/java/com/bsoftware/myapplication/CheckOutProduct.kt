@@ -227,12 +227,9 @@ fun CheckOutConfirmProduct() {
                     fontWeight = FontWeight.Bold
                 )
             }
-            }
-
-
         }
-
     }
+}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

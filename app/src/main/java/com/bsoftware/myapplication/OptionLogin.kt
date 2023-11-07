@@ -50,6 +50,7 @@ class OptionLogin : ComponentActivity() {
                     val activity = (LocalContext.current as Activity)
                     val context = LocalContext.current
                     val sharepreference = SharePreference(activity)
+
                     if(sharepreference.getLoginState()){ // if user is true
                         context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                         activity.finish()
@@ -95,7 +96,6 @@ fun OptionLoginUser(){
                     // click in here for get started
                      context.startActivity(Intent(context,SignUpActivity::class.java))
                      activity.finish()
-
                 },
                 modifier = Modifier
                     .padding(top = 20.dp, start = 50.dp, end = 50.dp)
@@ -131,10 +131,8 @@ fun OptionLoginUser(){
                     )
                 )
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)

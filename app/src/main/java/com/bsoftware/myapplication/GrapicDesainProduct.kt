@@ -43,12 +43,6 @@ import androidx.compose.ui.unit.sp
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
-/*
-* for note :
-* 1. Please change a intent getExtra value in product photography
-* 2. please check a code
-* */
-
 class GrapicDesainProduct : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +75,6 @@ fun GraphicDesignProduct() {
 
     // in here, we gonna set product name
     val intent = Intent(context,CheckOutProduct::class.java)
-
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(

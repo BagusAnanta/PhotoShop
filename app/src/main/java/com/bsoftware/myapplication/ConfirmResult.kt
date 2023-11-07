@@ -127,8 +127,6 @@ fun ConfirmProject() {
                 onClick = {
                     // intent into Main menu activity
                     sharePref.deleteProductChooseAll()
-                    /*context.startActivity(Intent(context,MainMenuActivity::class.java))
-                    activity.finish()*/
                     context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                     activity.finish()
                 },
@@ -144,10 +142,8 @@ fun ConfirmProject() {
                     fontWeight = FontWeight.Bold
                 )
             }
-
         }
     }
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)

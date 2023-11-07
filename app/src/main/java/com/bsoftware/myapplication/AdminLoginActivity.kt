@@ -166,12 +166,18 @@ fun LoginAdminLogic(){
                                 activity = activity,
                                 onSuccess = {
                                     // we gonna intent into Admin History and delete a User Login State in here
-                                    sharepreference.apply {
-                                        deleteLoginState()
-                                        setLoginAdminState(true)
+                                    // in here we gonna check a email
+                                    if(firebaseAuth.getEmail() == "admincando@gmail.com"){
+                                        sharepreference.apply {
+                                            deleteLoginState()
+                                            setLoginAdminState(true)
+                                        }
+                                        context.startActivity(Intent(context,AdminReport::class.java))
+                                        activity.finish()
+                                    } else {
+                                        // if a email is not admin email
+                                        Toast.makeText(activity,"You Not Admin",Toast.LENGTH_SHORT).show()
                                     }
-                                    context.startActivity(Intent(context,AdminReport::class.java))
-                                    activity.finish()
                                 },
                                 onFail = {
                                     Toast.makeText(activity,"SignIn Failed, please try again", Toast.LENGTH_SHORT).show()

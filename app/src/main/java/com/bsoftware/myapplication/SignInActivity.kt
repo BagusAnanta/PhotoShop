@@ -79,12 +79,7 @@ class MainActivity : ComponentActivity() {
                     val context = LocalContext.current
                     val sharepreference = SharePreference(activity)
                     firebaseAuth.initFirebaseAuth()
-                    if(sharepreference.getLoginState()){
-                        context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                        activity.finish()
-                    } else {
-                        LoginUserLogic()
-                    }
+                    LoginUserLogic()
                 }
             }
         }
@@ -195,6 +190,7 @@ fun LoginUserLogic(){
                                     sharepreference.setLoginState(true)
                                     context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
                                     activity.finish()
+                                    // in here we must get data from firebase userData
                                 },
                                 onFail = {
                                     Toast.makeText(activity,"SignIn Failed, please try again",Toast.LENGTH_SHORT).show()
