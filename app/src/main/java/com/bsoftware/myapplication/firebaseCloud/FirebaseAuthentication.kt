@@ -4,6 +4,7 @@ import android.app.Activity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 
 class FirebaseAuthentication {
@@ -63,6 +64,23 @@ class FirebaseAuthentication {
 
     fun getEmail() : String{
         return auth.currentUser?.email!!
+    }
+
+    fun getUserName() : String?{
+        return auth.currentUser?.displayName
+    }
+
+    fun addUpdateUserDisplayName(userName : String){
+        val user = Firebase.auth.currentUser
+        val updateNameDisplay = userProfileChangeRequest {
+            displayName = userName
+        }
+
+        user?.updateProfile(updateNameDisplay)?.addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                Log.d("OnUpdateDisplayName","DisplayNameSuccessAddorUpdate")
+            }
+        }
     }
 
     fun signOutEmail(){

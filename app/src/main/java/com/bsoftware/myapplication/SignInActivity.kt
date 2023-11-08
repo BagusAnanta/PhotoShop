@@ -186,6 +186,8 @@ fun LoginUserLogic(){
                                 password = password,
                                 activity = activity,
                                 onSuccess = {
+                                    // in here we gonna get email, username, and phonenum use username from firebase authentic update
+                                    getUserName()?.let { getDataUser(it,activity) }
                                     // we gonna intent into mainmenu activity
                                     sharepreference.setLoginState(true)
                                     context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
@@ -250,17 +252,20 @@ fun LoginUserLogic(){
     }
 }
 
-
-fun getDataUser(email : String,activity : Activity) {
+fun getDataUser(name : String,activity : Activity) {
     val firebase = FirebaseDatabase.getInstance()
-    val reference = firebase.getReference("userData").child(email) // in here we get a email data in child
+    val reference = firebase.getReference("userData").child(name) // in here we get a email data in child
     val sharepreference = SharePreference(activity)
 
-    val postListener = object : ValueEventListener{
+    // get email
+    val firebaseAuth = FirebaseAuthentication()
+    firebaseAuth.initFirebaseAuth()
+
+    val postListener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             val userData = snapshot.getValue(UserDataClass::class.java)
             sharepreference.apply {
-                setEmail(email)
+                setEmail(firebaseAuth.getEmail())
                 setName(userData!!.name)
                 setPhoneNum(userData.numberPhone)
             }
@@ -272,9 +277,6 @@ fun getDataUser(email : String,activity : Activity) {
     }
     reference.addValueEventListener(postListener)
 }
-
-
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

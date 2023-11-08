@@ -201,6 +201,8 @@ fun SignUp() {
                                  password = password,
                                  activity = activity,
                                  onSuccess = {
+                                     // in here we update a firebase display name
+                                     firebaseauthdata.addUpdateUserDisplayName(name)
                                      sharepreference.apply {
                                          setLoginState(true)
                                          setName(name)
