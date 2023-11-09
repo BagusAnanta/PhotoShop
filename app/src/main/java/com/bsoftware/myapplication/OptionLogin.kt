@@ -69,7 +69,8 @@ class OptionLogin : ComponentActivity() {
 @Composable
 fun OptionLoginUser(){
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
+    val activity = OptionLogin()
+    // val activity = (LocalContext.current as Activity)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(

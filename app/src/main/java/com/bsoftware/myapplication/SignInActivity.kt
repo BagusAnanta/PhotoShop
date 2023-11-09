@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val activity = (LocalContext.current as Activity)
+                    // val activity = MainActivity()
                     val context = LocalContext.current
                     val sharepreference = SharePreference(activity)
                     firebaseAuth.initFirebaseAuth()
@@ -94,6 +95,7 @@ fun LoginUserLogic(){
 
     val context = LocalContext.current
     val activity = (LocalContext.current as Activity)
+    //val activity = MainActivity()
 
     val sharepreference = SharePreference(activity)
 
