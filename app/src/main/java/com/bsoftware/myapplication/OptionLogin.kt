@@ -138,7 +138,7 @@ fun OptionLoginUser(){
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun OptionLogoPreview() {
+fun OptionLoginPreview() {
     MyApplicationTheme {
         OptionLoginUser()
     }
