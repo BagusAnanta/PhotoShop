@@ -21,15 +21,23 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -116,10 +124,9 @@ fun LoginUserLogic(){
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .height(280.dp)
+                            .height(300.dp)
                             .constrainAs(logoImage) {
-                                top.linkTo(loginForm.top)
-                                bottom.linkTo(loginForm.top)
+                                top.linkTo(parent.top)
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                             }
@@ -142,18 +149,46 @@ fun LoginUserLogic(){
                     Card(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = 100.dp)
+                            .height(800.dp)
                             .constrainAs(loginForm) {
+                                top.linkTo(logoImage.bottom)
                                 bottom.linkTo(parent.bottom)
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
-                            }
+                            },
+                        colors = CardDefaults.cardColors(
+                            containerColor = colorResource(id = R.color.brown_card)
+                        ),
+                        shape = RoundedCornerShape(20.dp)
                     ) {
+                        Column(
+                            modifier = Modifier.padding(start = 20.dp,end = 20.dp,top = 20.dp)
+                        ){
+                            Text(
+                                text = "Hello",
+                                style = TextStyle(
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 30.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
+                                )
+                            )
+                            Text(
+                                text = "Welcome Back !",
+                                style = TextStyle(
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 20.sp,
+                                    color = Color.White
+                                )
+                            )
+                        }
+
                         Column(
                             modifier = Modifier
                                 .fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
+                            ) {
+
                             OutlinedTextField(
                                 value = email,
                                 onValueChange = {email = it},
@@ -165,7 +200,12 @@ fun LoginUserLogic(){
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(start = 20.dp, end = 20.dp, top = 20.dp)
+                                    .padding(start = 20.dp, end = 20.dp, top = 20.dp),
+                                leadingIcon = { Icon(
+                                    Icons.Outlined.MailOutline,
+                                    contentDescription = "email_icon",
+                                    tint = Color.White
+                                )}
                             )
                             Spacer(modifier = Modifier.padding(top = 10.dp))
                             OutlinedTextField(
@@ -179,7 +219,12 @@ fun LoginUserLogic(){
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp)
+                                    .padding(start = 20.dp, end = 20.dp, top = 10.dp),
+                                leadingIcon = { Icon(
+                                    Icons.Outlined.Lock,
+                                    contentDescription = "passIcon",
+                                    tint = Color.White
+                                )}
                             )
                             Spacer(modifier = Modifier.padding(top = 10.dp))
 
@@ -284,7 +329,7 @@ fun LoginUserLogic(){
                                     // intent into sign up
                                     context.startActivity(Intent(context,SignUpActivity::class.java))
                                     activity.finish()
-                                }
+                                },
                             )
                         }
                     }
