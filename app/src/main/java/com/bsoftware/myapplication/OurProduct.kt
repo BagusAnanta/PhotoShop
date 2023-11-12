@@ -180,7 +180,7 @@ fun OurProductShow() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview() {
+fun OurProductPreview() {
     MyApplicationTheme {
         OurProductShow()
     }

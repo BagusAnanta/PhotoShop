@@ -5,17 +5,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -131,8 +136,24 @@ fun ShowMainMenu(){
                             lineHeight = 10.sp,
                             modifier = Modifier.padding(end = 10.dp)
                         )
-
-
+                        Card(
+                            shape = RoundedCornerShape(5.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 5.dp, bottom = 5.dp, end = 10.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White
+                            )
+                        ) {
+                            Text(
+                                text = "Lorem Ipsum dolor sit amet",
+                                style = TextStyle(
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                modifier = Modifier.padding(start = 5.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -159,13 +180,16 @@ fun ShowMainMenu(){
                         )
                     ){
                         Text(
-                            text = "See All",
+                            text = "See All ->",
                             textAlign = TextAlign.End,
                             fontSize = 12.sp,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(end = 20.dp),
-                            color = Color.White
+                            color = Color.White,
+                            style = TextStyle(
+                                fontWeight = FontWeight.Bold
+                            )
                         )
                     }
                 }
@@ -222,7 +246,10 @@ fun ShowMainMenu(){
                                 text = "Start Your Brand!",
                                 fontSize = 12.sp,
                                 modifier = Modifier.padding(top = 20.dp),
-                                color = Color.White
+                                color = Color.White,
+                                style = TextStyle(
+                                    fontWeight = FontWeight.ExtraBold
+                                )
                             )
                         }
                     }
@@ -239,6 +266,51 @@ fun ShowMainMenu(){
                     painter = painterResource(id = R.drawable.ic_launcher_background),
                     contentDescription = "ImageProject",
                 )
+            }
+
+            Column {
+                Text(
+                    text = "Favorite",
+                    modifier = Modifier.padding(start = 20.dp),
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                )
+
+                Text(
+                    text = "Most 3 Favorit Choice",
+                    modifier = Modifier.padding(start = 20.dp),
+                    style = TextStyle(
+                        fontSize = 15.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+
+                LazyRow(
+                    contentPadding = PaddingValues(5.dp),
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 5.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ){
+                    item {
+                        Image(
+                            painter = painterResource(id = R.drawable.preweddingbox),
+                            contentDescription = "PrewedPhoto",
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.dokumentasibox),
+                            contentDescription = "PrewedPhoto",
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.dokumentasibox),
+                            contentDescription = "PrewedPhoto",
+                        )
+                    }
+                }
             }
         }
     }
