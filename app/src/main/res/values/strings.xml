@@ -9,10 +9,10 @@
     <string name="title_activity_grapic_desain_product">GrapicDesainProduct</string>
     <string name="title_activity_video_graph_product">VideoGraphProduct</string>
     <string name="title_activity_check_out_product">CheckOutProduct</string>
-    <string name="kode_pesanan">Kode Pesanan : %s</string>
-    <string name="tanggal_pesanan">Tanggal Pesanan : %s</string>
-    <string name="nama_pemesan">Nama Pemesan : %s</string>
-    <string name="nomor_handphone">Nomor Handphone : %s</string>
+    <string name="kode_pesanan"><b>Order Code : %s</b></string>
+    <string name="tanggal_pesanan"><b>Order Date : %s</b></string>
+    <string name="nama_pemesan"><b>Name Orderer : %s</b></string>
+    <string name="nomor_handphone"><b>Phone Number : %s</b></string>
     <string name="nama_account">Name : %s</string>
     <string name="email_account">Email : %s</string>
     <string name="phonenum_account">Phone : %s</string>

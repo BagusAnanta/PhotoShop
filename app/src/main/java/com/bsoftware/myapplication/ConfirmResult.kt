@@ -62,8 +62,8 @@ class ConfirmResult : ComponentActivity() {
 @Composable
 fun ConfirmProject() {
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
-    val sharePref = SharePreference(activity)
+    /*val activity = (LocalContext.current as Activity)
+    val sharePref = SharePreference(activity)*/
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -126,9 +126,9 @@ fun ConfirmProject() {
             OutlinedButton(
                 onClick = {
                     // intent into Main menu activity
-                    sharePref.deleteProductChooseAll()
+                   /* sharePref.deleteProductChooseAll()
                     context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                    activity.finish()
+                    activity.finish()*/
                 },
                 modifier = Modifier
                     .padding(top = 20.dp, start = 50.dp, end = 50.dp)
