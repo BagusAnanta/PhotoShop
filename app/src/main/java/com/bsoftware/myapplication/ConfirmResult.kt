@@ -26,6 +26,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +38,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.bsoftware.myapplication.sharePreference.SharePreference
 import com.bsoftware.myapplication.ui.theme.MyApplicationTheme
 
@@ -64,6 +68,8 @@ fun ConfirmProject() {
     val context = LocalContext.current
     /*val activity = (LocalContext.current as Activity)
     val sharePref = SharePreference(activity)*/
+
+    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.check_mark_lottie_animation))
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -106,6 +112,11 @@ fun ConfirmProject() {
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally)
                 .padding(top = 30.dp)){
+
+                LottieAnimation(
+                    composition = composition
+                )
+
                 Text(
                     "Pesan Kami",
                     fontSize = 20.sp,
