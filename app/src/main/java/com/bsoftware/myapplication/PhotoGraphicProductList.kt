@@ -69,10 +69,10 @@ fun PhotoProduct() {
     var search by remember { mutableStateOf("") }
 
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
+    /*val activity = (LocalContext.current as Activity)
     val sharePref = SharePreference(activity = activity)
 
-    sharePref.setProductName("Photographic")
+    sharePref.setProductName("Photographic")*/
 
     val intent = Intent(context,CheckOutProduct::class.java)
 
@@ -126,7 +126,7 @@ fun PhotoProduct() {
             )
 
             Column(
-                modifier = Modifier.padding(top = 20.dp)
+                modifier = Modifier.padding(top = 30.dp)
             ){
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -140,7 +140,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -155,7 +155,7 @@ fun PhotoProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -167,17 +167,17 @@ fun PhotoProduct() {
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 5.dp)
+                        .padding(top = 20.dp)
                 ){
                     Image(
                         painter = painterResource(id = R.drawable.preweddingbox),
                         contentDescription = "photoproduct",
                         modifier = Modifier
-                            .size(160.dp, 280.dp)
+                            .size(160.dp, 240.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -188,11 +188,11 @@ fun PhotoProduct() {
                         painter = painterResource(id = R.drawable.preweddingbox),
                         contentDescription = "photoproduct",
                         modifier = Modifier
-                            .size(160.dp, 280.dp)
+                            .size(160.dp, 240.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -207,7 +207,7 @@ fun PhotoProduct() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview3() {
+fun PhotoPreview() {
     MyApplicationTheme {
         PhotoProduct()
     }

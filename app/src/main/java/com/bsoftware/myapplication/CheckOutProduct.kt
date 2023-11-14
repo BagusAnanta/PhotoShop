@@ -68,8 +68,8 @@ class CheckOutProduct : ComponentActivity() {
 @Composable
 fun CheckOutConfirmProduct() {
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
-    val sharepref = SharePreference(activity)
+   /* val activity = (LocalContext.current as Activity)
+    val sharepref = SharePreference(activity)*/
     val generateID = GenerateIDProduct()
     val dateNow = DateFormat()
     val firebaseAuth = FirebaseAuthentication()
@@ -77,8 +77,8 @@ fun CheckOutConfirmProduct() {
 
     val kodePesanan : Any = generateID.generateIDNumber(10)
     val tanggalPesanan : Any = dateNow.getDate()
-    val namaPemesan : Any? = sharepref.getName()
-    val nomorHandphone : Any? = sharepref.getPhoneNum()
+    /*val namaPemesan : Any? = sharepref.getName()
+    val nomorHandphone : Any? = sharepref.getPhoneNum()*/
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -135,11 +135,11 @@ fun CheckOutConfirmProduct() {
                         .fillMaxSize()
                 ) {
                     Column() {
-                        Text(
+                       /* Text(
                             sharepref.getProductName(),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Bold
-                        )
+                        )*/
                         Text(
                             "Product",
                             fontSize = 20.sp,
@@ -148,7 +148,8 @@ fun CheckOutConfirmProduct() {
                     }
 
                     Image(
-                        painter = painterResource(sharepref.getImageProduct()),
+                        // painter = painterResource(sharepref.getImageProduct()),
+                        painter = painterResource(R.drawable.foodphotography),
                         contentDescription = "photoproduct",
                         modifier = Modifier
                             .size(100.dp, 240.dp)
@@ -182,14 +183,15 @@ fun CheckOutConfirmProduct() {
                     modifier = Modifier.padding(top = 10.dp),
                     color = Color.White
                 )
-                 Text(
+                 /*Text(
                      text = stringResource(id = R.string.nama_pemesan,namaPemesan!!),
                      fontWeight = FontWeight.Bold,
                      modifier = Modifier.padding(top = 10.dp),
                      color = Color.White
-                 )
+                 )*/
                  Text(
-                     text = stringResource(id = R.string.nomor_handphone,nomorHandphone!!),
+                     // text = stringResource(id = R.string.nomor_handphone,nomorHandphone!!),
+                     text = "08315516007",
                      fontWeight = FontWeight.Bold,
                      modifier = Modifier.padding(top = 10.dp),
                      color = Color.White
@@ -201,19 +203,19 @@ fun CheckOutConfirmProduct() {
                       val firebase = FireBase()
                       firebase.apply {
                           initDatabase()
-                          writeDataCheckOut(
+                         /* writeDataCheckOut(
                               kodePesanan.toString(),
                               namaPemesan.toString(),
                               nomorHandphone.toString(),
                               tanggalPesanan.toString(),
                               sharepref.getProductName(),
                               firebaseAuth.getEmail()
-                          )
+                          )*/
                       }
 
                       // intent into ConfirmResult
                       context.startActivity(Intent(context,ConfirmResult::class.java))
-                      activity.finish()
+                      // activity.finish()
                 },
 
                 modifier = Modifier
@@ -233,7 +235,7 @@ fun CheckOutConfirmProduct() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview5() {
+fun CheckOutPreview() {
     MyApplicationTheme {
         CheckOutConfirmProduct()
     }

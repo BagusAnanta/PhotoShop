@@ -68,10 +68,10 @@ fun GraphicDesignProduct() {
     var search by remember { mutableStateOf("") }
     
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
+    /*val activity = (LocalContext.current as Activity)
     val sharePref = SharePreference(activity)
 
-    sharePref.setProductName("Design Graphic")
+    sharePref.setProductName("Design Graphic")*/
 
     // in here, we gonna set product name
     val intent = Intent(context,CheckOutProduct::class.java)
@@ -140,7 +140,7 @@ fun GraphicDesignProduct() {
                             .clickable {
                                 // click into checkout
                                 // in here we gonna intent a drawable int code
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -155,7 +155,7 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -177,7 +177,7 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -192,7 +192,7 @@ fun GraphicDesignProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),

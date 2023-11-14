@@ -69,11 +69,11 @@ fun VideoGraphicProduct() {
     var search by remember { mutableStateOf("") }
 
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
+   /* val activity = (LocalContext.current as Activity)
 
     val sharePref = SharePreference(activity)
 
-    sharePref.setProductName("Video Graphic")
+    sharePref.setProductName("Video Graphic")*/
     val intent = Intent(context,CheckOutProduct::class.java)
 
 
@@ -141,7 +141,7 @@ fun VideoGraphicProduct() {
                             .clickable {
                                 // click into checkout
                                 // in here we gonna change a id if have
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -156,7 +156,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -178,7 +178,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -193,7 +193,7 @@ fun VideoGraphicProduct() {
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 // click into checkout
-                                sharePref.setImageProduct(R.drawable.foodphotography)
+                                // sharePref.setImageProduct(R.drawable.foodphotography)
                                 context.startActivity(intent)
                             }
                             .fillMaxWidth(0.5f),
@@ -209,15 +209,15 @@ fun VideoGraphicProduct() {
                         .clip(RoundedCornerShape(16.dp))
                         .clickable {
                             // click into checkout
-                            sharePref.setImageProduct(R.drawable.foodphotography)
+                            // sharePref.setImageProduct(R.drawable.foodphotography)
                             context.startActivity(intent)
                         }
-                        .fillMaxWidth(0.5f),
+                        .fillMaxWidth(0.5f)
+                        .padding(top = 20.dp),
                     contentScale = ContentScale.FillBounds,
                 )
             }
         }
-
     }
 }
 

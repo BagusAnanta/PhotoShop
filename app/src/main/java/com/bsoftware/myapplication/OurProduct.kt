@@ -62,11 +62,11 @@ class OurProduct : ComponentActivity() {
 @Composable
 fun OurProductShow() {
     val context = LocalContext.current
-    val activity = (LocalContext.current as Activity)
-    val sharePref = SharePreference(activity)
+    /*val activity = (LocalContext.current as Activity)
+    val sharePref = SharePreference(activity)*/
 
     // in here we gonna delete a data choose in here
-    sharePref.deleteProductChooseAll()
+    // sharePref.deleteProductChooseAll()
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -119,7 +119,7 @@ fun OurProductShow() {
                         painter = painterResource(id = R.drawable.productfoto),
                         contentDescription = "photoproduct",
                         modifier = Modifier
-                            .size(160.dp, 240.dp)
+                            .size(160.dp, 200.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 context.startActivity(
@@ -169,12 +169,9 @@ fun OurProductShow() {
                         .fillMaxWidth(0.5f)
                         .padding(top = 20.dp)
                         .aspectRatio(16f / 9f)
-                        .padding(start = 10.dp),
                 )
             }
-
         }
-
     }
 }
 
