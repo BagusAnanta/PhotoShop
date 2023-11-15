@@ -16,6 +16,8 @@
     <string name="nama_account">Name : %s</string>
     <string name="email_account">Email : %s</string>
     <string name="phonenum_account">Phone : %s</string>
+    <string name="customer_service">Customer Service : %s</string>
+    <string name="email_service">Email Service : %s</string>
     <string name="title_activity_confirm_result">ConfirmResult</string>
     <string name="title_activity_admin_report">AdminReport</string>
     <string name="title_activity_account">AccountActivity</string>

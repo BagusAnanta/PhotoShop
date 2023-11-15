@@ -19,8 +19,10 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
@@ -32,7 +34,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -69,7 +74,7 @@ fun ConfirmProject() {
     /*val activity = (LocalContext.current as Activity)
     val sharePref = SharePreference(activity)*/
 
-    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.check_mark_lottie_animation))
+    // val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.check_mark_lottie_animation))
 
     Box(modifier = Modifier.fillMaxSize()){
         Image(
@@ -87,12 +92,12 @@ fun ConfirmProject() {
             Row{
                 Column{
                     Text(
-                        text = "Terima Kasih",
+                        text = "Thank You",
                         fontSize = 25.sp,
                         color = Color.White
                     )
                     Text(
-                        text = "Terima kasih atas Konfirmasinya!",
+                        text = "Thank You For Confirmation!",
                         fontSize = 15.sp,
                         color = Color.White
                     )
@@ -108,50 +113,95 @@ fun ConfirmProject() {
             }
 
             Card(modifier = Modifier
-                .size(500.dp, 210.dp)
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally)
-                .padding(top = 30.dp)){
-
-                LottieAnimation(
-                    composition = composition
+                .padding(top = 30.dp),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = colorResource(id = R.color.brown_card)
                 )
+            ){
+
+                /*LottieAnimation(
+                    composition = composition
+                )*/
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 40.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.logokecil),
+                        contentDescription = "Complete Mark",
+                        modifier = Modifier.size(width = 100.dp, height = 100.dp)
+                    )
+                }
 
                 Text(
-                    "Pesan Kami",
+                    "Thank's for Order",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .padding(top = 10.dp, start = 20.dp, bottom = 20.dp)
-                        .fillMaxWidth()
+                        .padding(top = 20.dp, start = 20.dp, bottom = 20.dp, end = 20.dp)
+                        .fillMaxWidth(),
+                    color = Color.White
                 )
 
                 Text(
-                    "Terima kasih telah memilih Can.DO Creative House sebagai mitra anda, costumer service  kami akan segera menghubungi anda,untuk segera merealisasikan keinginan anda",
+                    "Thank's for choose Can.DO Creative House for you partner,our customer service will contact you soon,to immediately make your wishes come true !",
                     fontSize = 15.sp,
-                    modifier = Modifier.padding(start = 20.dp,end = 20.dp)
+                    modifier = Modifier.padding(start = 20.dp,end = 20.dp, top = 20.dp, bottom = 20.dp),
+                    color = Color.White
                 )
-            }
 
-            OutlinedButton(
-                onClick = {
-                    // intent into Main menu activity
-                   /* sharePref.deleteProductChooseAll()
-                    context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
-                    activity.finish()*/
-                },
-                modifier = Modifier
-                    .padding(top = 20.dp, start = 50.dp, end = 50.dp)
-                    .fillMaxWidth(),
+                Spacer(modifier = Modifier.padding(10.dp))
 
-                shape = CutCornerShape(10)
-            ) {
                 Text(
-                    "Back to Home",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold
+                    text = "For information about Can.Do, you can call :",
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = Color.White
                 )
+
+                Text(
+                    text = stringResource(id = R.string.customer_service,"+62 342 7864 23456"),
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp),
+                    color = Color.White
+                )
+
+                Text(
+                    text = stringResource(id = R.string.email_service,"admincando@email.com"),
+                    fontSize = 15.sp,
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 5.dp),
+                    color = Color.White
+                )
+
+                OutlinedButton(
+                    onClick = {
+                        // intent into Main menu activity
+                        /* sharePref.deleteProductChooseAll()
+                         context.startActivity(Intent(context,MainMenuBottomActivity::class.java))
+                         activity.finish()*/
+                    },
+                    modifier = Modifier
+                        .padding(top = 20.dp, start = 50.dp, end = 50.dp, bottom = 20.dp)
+                        .fillMaxWidth(),
+
+                    shape = CutCornerShape(10)
+                ) {
+                    Text(
+                        "Back to Home",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }
